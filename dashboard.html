@@ -2,13 +2,65 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DashBoard</title>
+    <title>Dashboard - Customer Management System</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+<div class="container">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <h2>CMS</h2>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="customers.html">Customers</a>
+        <a href="installments.html">Installments</a>
+        <a href="reports.html">Reports</a>
+        <a href="branches.html">Branches</a>
+        <a href="cleared.html">Cleared</a>
+    </div>
+    <!-- MAIN -->
+    <div class="main">
 
-    <script src="dashboard.js"></script>
+        <!-- TOP BAR -->
+        <div class="topbar">
+            <h3>Dashboard</h3>
+            <button onclick="logout()">Logout</button>
+        </div>
+
+        <!-- CARDS -->
+        <div class="cards">
+
+            <div class="card">
+                <h4>Total Customers</h4>
+                <p id="totalCustomers">0</p>
+            </div>
+
+            <div class="card">
+                <h4>Total Amount</h4>
+                <p>500000</p>
+            </div>
+
+            <div class="card">
+                <h4>Received</h4>
+                <p>200000</p>
+            </div>
+
+            <div class="card">
+                <h4>Remaining</h4>
+                <p>300000</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+function logout(){
+    localStorage.removeItem("login");
+    window.location.href = "login.html";
+}
+</script>
+
 </body>
 </html>
