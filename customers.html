@@ -1,14 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customers</title>
+    <title>Customer - Customer Management System</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+<div class="container">
+    <div class="sidebar">
+        <h2>CMS</h2>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="customers.html">Customers</a>
+        <a href="installments.html">Installments</a>
+        <a href="reports.html">Reports</a>
+        <a href="branches.html">Branches</a>
+        <a href="cleared.html">Cleared</a>
+    </div>
+    <div class="main">
+        <h2>Add Customer</h2>
+        <div class="form">
 
-    <script src="customers.js"></script>
+            <input type="text" id="name" placeholder="Customer Name">
+            <input type="text" id="father" placeholder="Father Name">
+            <input type="text" id="mobile" placeholder="Mobile">
+            <input type="text" id="city" placeholder="City">
+            <input type="number" id="total" placeholder="Total Amount">
+            <input type="number" id="advance" placeholder="Advance Payment">
+
+            <button onclick="addCustomer()">Add Customer</button>
+        </div>
+        <h2 style="text-align: center;">Customer List</h2>
+
+        <table border="1" width="100%">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Mobile</th>
+                    <th>City</th>
+                    <th>Total</th>
+                    <th>Advance</th>
+                    <th>Remaining</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="customerTable"></tbody>
+        </table>
+    </div>
+</div>
+
+<script src="customers.js"></script>
 </body>
 </html>
