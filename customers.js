@@ -1,3 +1,6 @@
+if(localStorage.getItem("login") !== "true"){
+    window.location.href="login.html";
+}
 let customers = JSON.parse(localStorage.getItem("customers")) || [];
 let deletedCustomer = null;
 let undoContainer = null;
