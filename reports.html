@@ -2,13 +2,83 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Report</title>
+    <title>Reports - CMS</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+<div class="container">
+<div class="sidebar">
+<h2>CMS</h2>
 
-    <script src="dashboard.js"></script>
+<a href="dashboard.html">Dashboard</a>
+<a href="customers.html">Customers</a>
+<a href="major-sheet.html">Major Sheet</a>
+<a href="installments.html">Installments</a>
+<a href="reports.html">Reports</a>
+
+</div>
+<div class="main">
+<h2>Reports & Analytics</h2>
+<div class="summary">
+<div class="card">
+<h3>Total Customers</h3>
+<p id="customersCount">0</p>
+</div>
+
+<div class="card">
+<h3>Total Items Sold</h3>
+<p id="itemsSold">0</p>
+</div>
+
+<div class="card">
+<h3>Advance Received</h3>
+<p id="advanceTotal">0</p>
+</div>
+
+<div class="card">
+<h3>Installments Collected</h3>
+<p id="installmentTotal">0</p>
+</div>
+
+<div class="card">
+<h3>Outstanding Balance</h3>
+<p id="remainingTotal">0</p>
+</div>
+
+<div class="card">
+<h3>Total Collection</h3>
+<p id="collectionTotal">0</p>
+</div>
+</div>
+<div class="report-filter">
+<button id="dailyBtn" onclick="filterReport('daily')">Daily</button>
+<button id="tenDaysBtn" onclick="filterReport('10days')">Last 10 Days</button>
+<button id="monthlyBtn" onclick="filterReport('monthly')">Monthly</button>
+<button id="allBtn" onclick="filterReport('all')">All Records</button>
+</div>
+<h2>Customer Report</h2>
+
+<table border="1" width="100%">
+<thead>
+<tr>
+<th>Date</th>
+<th>Customer</th>
+<th>Items</th>
+<th>Total Amount</th>
+<th>Advance</th>
+<th>Installments</th>
+<th>Remaining</th>
+</tr>
+
+</thead>
+
+
+<tbody id="reportTable">
+
+</tbody>
+</table>
+</div>
+</div>
+<script src="reports.js"></script>
 </body>
 </html>
