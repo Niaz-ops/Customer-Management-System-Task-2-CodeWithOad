@@ -9,6 +9,7 @@ let name = document.getElementById("name").value;
 let father = document.getElementById("father").value;
 let mobile = document.getElementById("mobile").value;
 let city = document.getElementById("city").value;
+let previousId = document.getElementById("previousId").value;
 let date = document.getElementById("date").value;
 let totalItems = Number(document.getElementById("totalItems").value);
 let totalAmount = Number(document.getElementById("totalAmount").value);
@@ -39,15 +40,23 @@ editId = null;
 document.querySelector(".form button").innerText = "Add Customer";
 }else
 {
+if(previousId !== ""){
+let exists = customers.some(c => c.id === previousId);
+if(!exists){
+alert("Previous Customer ID does not exist");
+return;
+}
+}
+
 let customer = {
 serial: serialNumber,
-id: "CUST-" + Date.now(),
+id: previousId !== "" ? previousId : "CUST-" + Date.now(),
 name,
 father,
 mobile,
 city,
 date,
-totalItems : totalItems,
+totalItems,
 totalAmount,
 advance,
 remaining
@@ -55,9 +64,10 @@ remaining
 customers.push(customer);
 serialNumber++;
 localStorage.setItem(
-    "serialNumber",
-    JSON.stringify(serialNumber)
+"serialNumber",
+JSON.stringify(serialNumber)
 );
+
 }
 localStorage.setItem("customers",JSON.stringify(customers));
 renderTable();
@@ -70,6 +80,7 @@ document.getElementById("date").value = "";
 document.getElementById("totalItems").value = "";
 document.getElementById("totalAmount").value = "";
 document.getElementById("advance").value = "";
+document.getElementById("previousId").value = "";
 
 }
 

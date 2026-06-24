@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Major Sheet - CMS</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="container">
+  <div class="sidebar">
+    <h2>CMS</h2>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="customers.html">Customers</a>
+    <a href="major-sheet.html">Major Sheet</a>
+    <a href="installments.html">Installments</a>
+    <a href="reports.html">Reports</a>
+  </div>
+
+  <div class="main">
+    <h2>Central Ledger (Major Sheet)</h2>
+    <div class="summary">
+        <div class="card">
+        <h3>Total Customers</h3>
+        <p id="totalCustomers">0</p>
+        </div>
+        <div class="card">
+        <h3>Total Sales</h3>
+        <p id="totalSales">0</p>
+        </div>
+
+        <div class="card">
+        <h3>Total Advance</h3>
+        <p id="totalAdvance">0</p>
+        </div>
+
+        <div class="card">
+        <h3>Total Remaining</h3>
+        <p id="totalRemaining">0</p>
+        </div>
+    </div>
+
+    <table border="1" width="100%">
+      <thead>
+        <tr>
+          <th>Serial</th>
+          <th>Customer ID</th>
+          <th>Name</th>
+          <th>Total Items</th>
+          <th>Total Amount</th>
+          <th>Advance</th>
+          <th>Remaining</th>
+        </tr>
+      </thead>
+
+      <tbody id="majorTable"></tbody>
+    </table>
+  </div>
+</div>
+
+<script src="major-sheet.js"></script>
+
+</body>
+</html>
