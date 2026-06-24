@@ -59,7 +59,8 @@ date,
 totalItems,
 totalAmount,
 advance,
-remaining
+remaining,
+installments: []
 };
 customers.push(customer);
 serialNumber++;
