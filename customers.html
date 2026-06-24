@@ -22,23 +22,31 @@
         <div class="form">
 
             <input type="text" id="name" placeholder="Customer Name">
-            <input type="text" id="father" placeholder="Father Name">
+            <input type="text" id="father" placeholder="Father/Husband Name">
             <input type="text" id="mobile" placeholder="Mobile">
-            <input type="text" id="city" placeholder="City">
-            <input type="number" id="total" placeholder="Total Amount">
+            <input type="text" id="city" placeholder="City/Area">
+            <input type="date" id="date" placeholder="Purchase Date">
+            <input type="number" id="totalItems" placeholder="Total Items">
+            <input type="number" id="totalAmount" placeholder="Total Amount">
             <input type="number" id="advance" placeholder="Advance Payment">
 
             <button onclick="addCustomer()">Add Customer</button>
         </div>
         <h2 style="text-align: center;">Customer List</h2>
+        
+        <input type="text" id="searchInput" placeholder="Search by Name, ID, Mobile, Father Name, City"
+            onkeyup="searchCustomer()">
 
         <table border="1" width="100%">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>Serial No</th>
+                    <th>Customer ID</th>
                     <th>Name</th>
                     <th>Mobile</th>
                     <th>City</th>
+                    <th>Purchase Date</th>
+                    <th>Total Items</th>
                     <th>Total</th>
                     <th>Advance</th>
                     <th>Remaining</th>

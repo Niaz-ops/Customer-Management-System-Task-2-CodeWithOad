@@ -135,8 +135,18 @@ table button{
     border: none;
     padding: 5px 10px;
     cursor: pointer;
+    margin: 3px;
 }
 
 table button:hover{
     background: darkred;
+}
+
+#searchInput{
+width:400px;
+padding:10px;
+margin:15px 0;
+border:1px solid #ccc;
+border-radius:5px;
+font-size:16px;
 }
