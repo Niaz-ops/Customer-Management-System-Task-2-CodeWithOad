@@ -1,18 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cleared Customers - CMS</title>
+
+<title>Backup - CMS</title>
+
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/cleared.css">
+<link rel="stylesheet" href="css/backup.css">
 
 </head>
 
+
 <body>
+
+
 <div class="container">
+
+
 <div class="sidebar">
+
 <h2>CMS</h2>
+
 <a href="dashboard.html">Dashboard</a>
 <a href="customers.html">Customers</a>
 <a href="installments.html">Installments</a>
@@ -22,35 +32,52 @@
 <a href="cleared.html">Cleared</a>
 <a href="history.html">History</a>
 <a href="backup.html">Backup</a>
+
+
 </div>
+
+
 
 <div class="main">
+
+
 <div class="topbar">
-<h3>Cleared Customers</h3>
-<button class="logout-btn" onclick="logout()">Logout</button>
+
+<h3>Backup & Recovery</h3>
+
+<button class="logout-btn" onclick="logout()">
+Logout
+</button>
+
 </div>
 
-<h2>Fully Paid Customers</h2>
-<table border="1" width="100%">
-<thead>
-<tr>
-<th>Customer ID</th>
-<th>Name</th>
-<th>Mobile</th>
-<th>Total Amount</th>
-<th>Payment History</th>
-<th>Action</th>
 
-</tr>
-</thead>
-<tbody id="clearedTable">
-</tbody>
-</table>
+
+<h2>Data Backup</h2>
+
+
+<button onclick="backupData()">
+Download Backup
+</button>
+
+
+
+<h2>Restore Data</h2>
+
+
+<input type="file" id="restoreFile">
+
+
+<button onclick="restoreData()">
+Restore Backup
+</button>
+
+<p id="message"></p>
 </div>
 </div>
-
 <script src="script.js"></script>
-<script src="js/cleared.js"></script>
-
+<script src="js/auth.js"></script>
+<script src="js/backup.js"></script>
 </body>
+
 </html>

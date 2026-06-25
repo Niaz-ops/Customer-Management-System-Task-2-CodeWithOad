@@ -1,0 +1,17 @@
+.main button{
+padding:10px 20px;
+background:#111;
+color:white;
+border:none;
+cursor:pointer;
+margin:10px;
+
+}
+
+.main button:hover{
+background:green;
+}
+
+#restoreFile{
+margin:20px;
+}
