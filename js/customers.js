@@ -121,17 +121,136 @@ ${checkPermission("delete")?
 }
 let deletedIndex = null;
 function deleteCustomer(id){
-addHistory("Delete Customer",id);
+
+let customer = customers.find(c => c.id == id);
+
+if(!customer){
+    return;
+}
+
+
 deletedIndex = customers.findIndex(c => c.id == id);
-deletedCustomer = customers[deletedIndex];
+deletedCustomer = customer;
+
+
+// remove customer
 customers.splice(deletedIndex,1);
-localStorage.setItem("customers",JSON.stringify(customers));
-addHistory(
-    "Customer Deleted",
-    customer.id
+
+
+localStorage.setItem(
+"customers",
+JSON.stringify(customers)
 );
+
+
+addHistory(
+"Customer Deleted",
+customer.id
+);
+
+
 renderTable();
-showUndoButton();
+
+showUndoRow(customer);
+
+}
+function showUndoRow(customer){
+
+let table = document.getElementById("customerTable");
+
+let row = document.createElement("tr");
+
+row.id = "undoRow";
+
+
+row.innerHTML = `
+
+<td colspan="12"
+style="
+background:#ffe0e0;
+text-align:center;
+padding:10px;
+">
+
+Customer 
+<b>${customer.name}</b>
+deleted.
+
+<button id="undoBtn"
+style="
+background:orange;
+color:black;
+padding:5px 15px;
+border:none;
+cursor:pointer;
+margin-left:20px;
+">
+Undo
+</button>
+
+</td>
+
+`;
+
+
+table.prepend(row);
+
+
+
+document.getElementById("undoBtn").onclick=function(){
+
+
+let alreadyExists = customers.some(
+c=>c.id===customer.id
+);
+
+
+if(alreadyExists){
+alert("Customer already restored");
+return;
+}
+
+
+
+customers.splice(
+deletedIndex,
+0,
+customer
+);
+
+
+localStorage.setItem(
+"customers",
+JSON.stringify(customers)
+);
+
+
+
+addHistory(
+"Customer Restored",
+customer.id
+);
+
+
+
+row.remove();
+
+
+renderTable();
+
+
+};
+
+
+setTimeout(()=>{
+
+if(document.getElementById("undoRow")){
+document.getElementById("undoRow").remove();
+}
+
+},5000);
+
+
 }
 renderTable();
 
@@ -157,39 +276,119 @@ if(undoContainer){
     undoContainer.remove();
 }
 
+
 undoContainer = document.createElement("div");
+
 undoContainer.innerHTML = `
-<div style=" background:#ffe0e0; padding:10px; margin:10px 0; border:1px solid red;
-display:flex; justify-content:space-between; align-items:center;">
+<div style="
+background:#ffe0e0;
+padding:10px;
+margin:10px 0;
+border:1px solid red;
+display:flex;
+justify-content:space-between;
+align-items:center;
+">
 
 <span>Customer deleted successfully</span>
 
-<button style=" background:orange; border:none; padding:5px 10px; cursor:pointer;">Undo</button>
+<button id="undoBtn"
+style="
+background:orange;
+border:none;
+padding:5px 10px;
+cursor:pointer;
+">
+Undo
+</button>
+
 </div>
 `;
 
-document.querySelector(".main").prepend(undoContainer);
-undoContainer.querySelector("button").onclick = function(){
 
-customers.splice(
-    deletedIndex,
-    0,
-    deletedCustomer
-);
-localStorage.setItem("customers",JSON.stringify(customers));
-addHistory(
-    "Customer Updated",
-    customer.id
-);
-renderTable();
-undoContainer.remove();
-};
-setTimeout(() => {
-    if(undoContainer){   undoContainer.remove();
-    }
-}, 5000);
+document.querySelector(".main").prepend(undoContainer);
+
+
+
+let undoBtn = document.getElementById("undoBtn");
+
+undoBtn.onclick = function(){
+
+
+if(!deletedCustomer){
+    return;
 }
 
+
+// Check duplicate before restoring
+
+let alreadyExists = customers.some(
+c => c.id === deletedCustomer.id
+);
+
+
+if(alreadyExists){
+
+alert("Customer already restored");
+return;
+
+}
+
+
+// Restore customer
+
+customers.splice(
+deletedIndex,
+0,
+deletedCustomer
+);
+
+
+localStorage.setItem(
+"customers",
+JSON.stringify(customers)
+);
+
+
+addHistory(
+"Customer Restored",
+deletedCustomer.id
+);
+
+
+// Clear deleted data
+
+deletedCustomer = null;
+deletedIndex = null;
+
+
+// Remove undo button
+
+undoContainer.remove();
+
+
+renderTable();
+
+};
+
+
+
+setTimeout(()=>{
+
+if(undoContainer){
+
+undoContainer.remove();
+
+}
+
+deletedCustomer = null;
+deletedIndex = null;
+
+
+},5000);
+
+
+}
 function searchCustomer(){
 let searchValue = document.getElementById("searchInput").value.toLowerCase();
 let table = document.getElementById("customerTable");

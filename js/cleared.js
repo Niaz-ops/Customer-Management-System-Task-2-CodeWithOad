@@ -30,7 +30,7 @@ table.innerHTML +=`
 <td>${c.id}</td>
 <td>${c.name}</td>
 <td>${c.mobile}</td>
-<td>Rs ${c.totalAmount}</td>
+<td>Rs ${Number(c.totalAmount).toLocaleString()}</td>
 <td>${history}</td>
 <td><button onclick="reopenCustomer('${c.id}')">Reopen</button></td>
 </tr>
@@ -39,13 +39,45 @@ table.innerHTML +=`
 }
 
 function reopenCustomer(id){
+
 let customer = customers.find(c=>c.id===id);
+
 if(!customer){
     return;
 }
-customer.remaining = customer.totalAmount;
-localStorage.setItem("customers",JSON.stringify(customers));
-alert("Customer account reopened");
+
+let paidAmount = Number(customer.advance || 0);
+
+if(customer.installments){
+
+customer.installments.forEach(p=>{
+    paidAmount += Number(p.amount);
+});
+
+}
+customer.remaining =
+Number(customer.totalAmount) - paidAmount;
+
+
+localStorage.setItem(
+"customers",
+JSON.stringify(customers)
+);
+
+if(typeof addHistory === "function"){
+
+addHistory(
+"Customer Reopened",
+customer.id + " - " + customer.name
+);
+
+}
+alert(
+"Customer account reopened successfully"
+);
+
+
 loadClearedCustomers();
+
 }
 loadClearedCustomers();

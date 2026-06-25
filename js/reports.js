@@ -1,4 +1,5 @@
 let customers = JSON.parse(localStorage.getItem("customers")) || [];
+let branches = JSON.parse(localStorage.getItem("branches")) || [];
 
 function loadReports(data){
 let items = 0;
@@ -34,10 +35,10 @@ table.innerHTML += `
 <td>${c.date}</td>
 <td>${c.name}</td>
 <td>${c.totalItems}</td>
-<td>${c.totalAmount}</td>
-<td>${c.advance}</td>
-<td>${customerInstallments}</td>
-<td>${c.remaining}</td>
+<td>Rs ${Number(c.totalAmount).toLocaleString()}</td>
+<td>Rs ${Number(c.advance).toLocaleString()}</td>
+<td>Rs ${Number(customerInstallments).toLocaleString()}</td>
+<td>Rs ${Number(c.remaining).toLocaleString()}</td>
 
 </tr>
 `;
@@ -47,6 +48,7 @@ document.getElementById("itemsSold").innerText=items;
 document.getElementById("advanceTotal").innerText=advance;
 document.getElementById("installmentTotal").innerText=installments;
 document.getElementById("remainingTotal").innerText=remaining;
+document.getElementById("branchCount").innerText = branches.length;
 document.getElementById("collectionTotal").innerText =
 advance + installments;
 }
@@ -101,4 +103,7 @@ purchaseDate.getFullYear() === today.getFullYear();
 return true;
 });
 loadReports(filtered);
+}
+function printReport(){
+    window.print();
 }
