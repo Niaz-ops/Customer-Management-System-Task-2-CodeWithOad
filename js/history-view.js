@@ -1,9 +1,9 @@
-let historyData = 
+let historyData =
 JSON.parse(localStorage.getItem("history")) || [];
 
 
 
-function loadHistory(data){
+function loadHistory(data = historyData){
 
 
 let table =
@@ -16,15 +16,12 @@ table.innerHTML="";
 
 if(data.length===0){
 
-
 table.innerHTML=`
 
 <tr>
-
-<td colspan="6">
+<td colspan="7">
 No History Found
 </td>
-
 </tr>
 
 `;
@@ -42,27 +39,121 @@ table.innerHTML += `
 
 <tr>
 
-<td>${h.id || index+1}</td>
+<td>${index+1}</td>
+
+<td>${h.action}</td>
 
 <td>${h.user || "Unknown"}</td>
 
 <td>${h.role || "-"}</td>
 
-<td>${h.action}</td>
-
 <td>${h.details}</td>
 
-<td>${h.dateTime || h.date}</td>
+<td>${h.date}</td>
+
+
+<td>
+
+${
+localStorage.getItem("role")==="Super Admin"
+
+?
+
+`<button onclick="deleteHistory(${index})">
+Delete
+</button>`
+
+:
+
+"View Only"
+
+}
+
+</td>
 
 
 </tr>
-
 
 `;
 
 });
 
+
 }
+
+
+
+function deleteHistory(index){
+
+
+if(localStorage.getItem("role") !== "Super Admin"){
+
+alert(
+"Only Super Admin can delete history"
+);
+
+return;
+
+}
+
+
+let confirmDelete =
+confirm("Delete this history record?");
+
+
+if(!confirmDelete){
+return;
+}
+
+
+
+historyData.splice(index,1);
+
+
+localStorage.setItem(
+"history",
+JSON.stringify(historyData)
+);
+
+
+loadHistory();
+
+}
+
+
+
+
+function clearAllHistory(){
+
+
+if(localStorage.getItem("role") !== "Super Admin"){
+
+alert(
+"Only Super Admin can clear history"
+);
+
+return;
+
+}
+
+
+if(!confirm("Delete all history?")){
+return;
+}
+
+
+localStorage.removeItem("history");
+
+
+historyData=[];
+
+
+loadHistory();
+
+}
+
+
+
 
 function searchHistory(){
 
@@ -74,16 +165,14 @@ document.getElementById("searchHistory")
 
 
 
-let filtered =
-historyData.filter(h=>{
+let filtered = historyData.filter(h=>{
 
 
-return(
+return (
 
 (h.user || "")
 .toLowerCase()
 .includes(value)
-
 
 ||
 
@@ -91,21 +180,22 @@ return(
 .toLowerCase()
 .includes(value)
 
-
-
 ||
 
 (h.details || "")
 .toLowerCase()
 .includes(value)
 
-
 );
 
 
 });
 
+
 loadHistory(filtered);
+
+
 }
 
-loadHistory(historyData);
+
+loadHistory();
