@@ -1,4 +1,6 @@
-if(localStorage.getItem("login") !== "true"){
+function logout(){
+    localStorage.removeItem("login");
+    localStorage.removeItem("role");
     window.location.href="login.html";
 }
 let customers = JSON.parse(localStorage.getItem("customers")) || [];

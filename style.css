@@ -1,259 +1,74 @@
-/*============ Login ==========*/
 body{
-    font-family: Arial;
     margin:0;
-    background:#f2f2f2;
+    font-family:Arial, sans-serif;
+    background:#f4f6f8;
 }
 
-.login-body{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-}
-
-.login-box{
-    background:white;
-    padding:30px;
-    width:300px;
-    box-shadow:0px 0px 10px rgba(0,0,0,0.2);
-    text-align:center;
-    border-radius:10px;
-}
-
-.login-box input{
-    width:100%;
-    padding:10px;
-    margin:10px 0;
-}
-
-.login-box button{
-    width:100%;
-    padding:10px;
-    background:#007bff;
-    color:white;
-    border:none;
-    cursor:pointer;
-}
-
-.login-box button:hover{
-    background:#0056b3;
-}
-
-#error{
-    color:red;
-}
-
-/*============ DashBoard ==========*/
-.container{
-    display:flex;
-}
-
-.sidebar{
-    width:220px;
-    height:100vh;
-    background:#111;
-    color:white;
-    padding:20px;
-}
-
-.sidebar a{
-    display:block;
-    color:white;
-    text-decoration:none;
-    margin:15px 0;
-}
-
-.main{
-    flex:1;
-    padding:20px;
-}
-
-.topbar{
+header{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    background:white;
-    padding:10px 20px;
-    margin-bottom:20px;
-}
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
-}
-
-.card{
-    background:white;
-    padding:20px;
-    box-shadow:0 0 10px rgba(0,0,0,0.1);
-    text-align:center;
-}
-
-/*============ Customer ==========*/
-.form input{
-    display:block;
-    width:300px;
-    padding:10px;
-    margin:10px 0;
-}
-
-.form button{
-    padding:10px 20px;
-    background:green;
+    padding:20px 50px;
+    background:#111;
     color:white;
-    border:none;
-    cursor:pointer;
 }
 
-table{
-    border-collapse: collapse;
-    margin-top: 20px;
-    background: white;
-}
-
-table th{
-    background: #111;
-    color: white;
-    padding: 10px;
-    text-align: left;
-}
-
-table td{
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-table tr:hover{
-    background: #f2f2f2;
-}
-
-table button{
-    background: red;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    margin: 3px;
-}
-
-table button:hover{
-    background: darkred;
-}
-
-#searchInput{
-width:400px;
-padding:10px;
-margin:15px 0;
-border:1px solid #ccc;
-border-radius:5px;
-font-size:16px;
-}
-
-/*========== Major Sheet ==========*/
-.summary{
-display:flex;
-gap:15px;
-margin:20px 0;
-flex-wrap:wrap;
-}
-
-.card{
-background:white;
-padding:15px;
-width:200px;
-border-left:5px solid green;
-box-shadow:0 2px 5px rgba(0,0,0,0.1);
-}
-
-.card h3{
-margin:0;
-font-size:16px;
-}
-
-.card p{
-font-size:20px;
-font-weight:bold;
-}
-
-/* Installment Page */
-h2, h3 {
-    text-align: center;
-}
-
-input {
-    display: block;
-    width: 300px;
-    padding: 10px;
-    margin: 10px auto;
-}
-
-button {
-    display: block;
-    margin: 10px auto;
-    padding: 10px 20px;
-    background: green;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {
-    background: darkgreen;
-}
-
-#history {
-    width: 60%;
-    margin: auto;
-    background: #f5f5f5;
-    padding: 15px;
-    border-radius: 5px;
-}
-/*========== Report Page ==========*/
-.summary{
-    display:flex;
-    gap:15px;
-    flex-wrap:wrap;
-    margin:20px 0;
-}
-
-.card{
-    background:white;
-    padding:20px;
-    width:180px;
-    box-shadow:0 2px 5px #ccc;
-    border-radius:8px;
-}
-
-.card h3{
-    font-size:16px;
-}
-
-.card p{
-    font-size:22px;
+.logo{
+    font-size:28px;
     font-weight:bold;
 }
 
-.report-filter{
-    margin:20px 0;
-    display:flex;
-    gap:10px;
-}
-
-.report-filter button{
-    padding:10px 20px;
-    background:#111;
+.login-btn{
+    background:#007bff;
     color:white;
-    border:none;
-    cursor:pointer;
+    padding:10px 20px;
+    text-decoration:none;
     border-radius:5px;
 }
 
-.report-filter button:hover{
-    background:green;
+.hero{
+    text-align:center;
+    padding:80px 20px;
 }
-.report-filter button.active{
-    background: green;
+
+.hero h1{
+    font-size:45px;
+}
+
+.hero p{
+    font-size:20px;
+    color:#555;
+}
+
+.start-btn{
+    display:inline-block;
+    margin-top:20px;
+    background:green;
+    color:white;
+    padding:12px 25px;
+    text-decoration:none;
+    border-radius:5px;
+}
+
+.features{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    padding:30px;
+}
+
+.feature-card{
+    background:white;
+    width:250px;
+    padding:25px;
+    text-align:center;
+    border-radius:10px;
+    box-shadow:0 2px 10px #ccc;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    background:#111;
     color:white;
 }

@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard - Customer Management System</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Dashboard - CMS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    
 </head>
 <body>
 <div class="container">
@@ -21,7 +23,7 @@
 
         <div class="topbar">
             <h3>Dashboard</h3>
-            <button onclick="logout()">Logout</button>
+            <button class="logout-btn" onclick="logout()">Logout</button>
         </div>
 
         <div class="cards">
@@ -44,13 +46,7 @@
         </div>
     </div>
 </div>
-
-<script>
-function logout(){
-    localStorage.removeItem("login");
-    window.location.href = "login.html";
-}
-</script>
-<script src="dashboard.js"></script>
+<script src="script.js"></script>
+<script src="js/dashboard.js"></script>
 </body>
 </html>

@@ -3,38 +3,46 @@
 <head>
 <meta charset="UTF-8">
 <title>Major Sheet - CMS</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/major-sheet.css">
+
 </head>
 
 <body>
 <div class="container">
   <div class="sidebar">
     <h2>CMS</h2>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="customers.html">Customers</a>
-    <a href="major-sheet.html">Major Sheet</a>
-    <a href="installments.html">Installments</a>
-    <a href="reports.html">Reports</a>
+     <a href="dashboard.html">Dashboard</a>
+        <a href="customers.html">Customers</a>
+        <a href="installments.html">Installments</a>
+        <a href="major-sheet.html">Major Sheet</a>
+        <a href="reports.html">Reports</a>
+        <a href="branches.html">Branches</a>
+        <a href="cleared.html">Cleared</a>
   </div>
 
   <div class="main">
+    <div class="topbar">
+    <h3>Major Sheet</h3>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </div>
     <h2>Central Ledger (Major Sheet)</h2>
     <div class="summary">
-        <div class="card">
+        <div class="major-card">
         <h3>Total Customers</h3>
         <p id="totalCustomers">0</p>
         </div>
-        <div class="card">
+        <div class="major-card">
         <h3>Total Sales</h3>
         <p id="totalSales">0</p>
         </div>
 
-        <div class="card">
+        <div class="major-card">
         <h3>Total Advance</h3>
         <p id="totalAdvance">0</p>
         </div>
 
-        <div class="card">
+        <div class="major-card">
         <h3>Total Remaining</h3>
         <p id="totalRemaining">0</p>
         </div>
@@ -57,8 +65,8 @@
     </table>
   </div>
 </div>
-
-<script src="major-sheet.js"></script>
+<script src="script.js"></script>
+<script src="js/major-sheet.js"></script>
 
 </body>
 </html>

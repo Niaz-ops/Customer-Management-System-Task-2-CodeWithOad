@@ -3,11 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Installment</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Installment - CMS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/installments.css">
+    
 </head>
 <body>
-    <h2>Installment Payment</h2>
+
+<div class="container">
+<div class="sidebar">
+<h2>CMS</h2>
+
+    <a href="dashboard.html">Dashboard</a>
+    <a href="customers.html">Customers</a>
+    <a href="installments.html">Installments</a>
+    <a href="major-sheet.html">Major Sheet</a>
+    <a href="reports.html">Reports</a>
+    <a href="branches.html">Branches</a>
+    <a href="cleared.html">Cleared</a>
+
+</div>
+
+<div class="main">
+    <div class="topbar">
+    <h3>Installments</h3>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+</div>
+    <h3>Installment Payment</h3>
 
     <input id="customerId" placeholder="Enter Customer ID">
     <input id="amount" type="number" placeholder="Installment Amount">
@@ -16,8 +38,8 @@
 <hr>
     <h3>Payment History</h3>
     <div id="history"></div>
-    
 
-    <script src="installments.js"></script>
+    <script src="script.js"></script>
+    <script src="js/installments.js"></script>
 </body>
 </html>

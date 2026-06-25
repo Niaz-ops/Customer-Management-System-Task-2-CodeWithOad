@@ -1,0 +1,67 @@
+
+/*========== Logout Button ==========*/
+
+.logout-btn{
+    display:block;
+    margin:0;
+    padding:8px 18px;
+    background:#dc3545;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.logout-btn:hover{
+    background:#b02a37;
+}
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:white;
+    padding:10px 20px;
+    margin-bottom:20px;
+}
+/*========== Side Bar ==========*/
+
+/*========== Layout ==========*/
+
+.container{
+    display:flex;
+    min-height:100vh;
+}
+
+
+/*========== Sidebar ==========*/
+
+.sidebar{
+    width:220px;
+    min-height:100vh;
+    background:#111;
+    color:white;
+    padding:20px;
+    box-sizing:border-box;
+    flex-shrink:0;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    margin:15px 0;
+}
+
+.sidebar a:hover{
+    color:#00ff88;
+}
+
+/*========== Main Content ==========*/
+
+.main{
+    flex:1;
+    padding:20px;
+    overflow-x:auto;
+}

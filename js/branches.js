@@ -1,6 +1,3 @@
-if(localStorage.getItem("login") !== "true"){
-    window.location.href="login.html";
-}
 let branches = JSON.parse(localStorage.getItem("branches")) || [];
 
 function addBranch(){

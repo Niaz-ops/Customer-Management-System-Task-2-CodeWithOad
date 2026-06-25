@@ -1,0 +1,48 @@
+
+/*========== Report Page ==========*/
+.summary{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    margin:20px 0;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    width:180px;
+    box-shadow:0 2px 5px #ccc;
+    border-radius:8px;
+}
+
+.card h3{
+    font-size:16px;
+}
+
+.card p{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.report-filter{
+    margin:20px 0;
+    display:flex;
+    gap:10px;
+}
+
+.report-filter button{
+    padding:10px 20px;
+    background:#111;
+    color:white;
+    border:none;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+.report-filter button:hover{
+    background:green;
+}
+.report-filter button.active{
+    background: green;
+    color:white;
+}

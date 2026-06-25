@@ -1,0 +1,33 @@
+/*========== Installment Page =========== */
+h3 {
+    text-align: center;
+}
+
+input {
+    display: block;
+    width: 300px;
+    padding: 10px;
+    margin: 10px auto;
+}
+
+button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background: green;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: darkgreen;
+}
+
+#history {
+    width: 60%;
+    margin: auto;
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 5px;
+}

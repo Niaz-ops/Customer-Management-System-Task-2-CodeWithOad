@@ -1,6 +1,3 @@
-if(localStorage.getItem("login") !== "true"){
-    window.location.href="login.html";
-}
 let customers = JSON.parse(localStorage.getItem("customers")) || [];
 
 function addInstallment(){
