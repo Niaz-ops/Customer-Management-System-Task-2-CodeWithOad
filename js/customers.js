@@ -107,7 +107,7 @@ table.innerHTML += `
 <td>${c.remaining}</td>
 <td>
 <button onclick="editCustomer('${c.id}')">Edit</button>
-${localStorage.getItem("role") === "Super Admin"?
+${checkPermission("delete")?
 `<button onclick="deleteCustomer('${c.id}')">Delete</button>`:""
 }
 </td>
@@ -216,3 +216,7 @@ branchSelect.innerHTML += `
 }
 
 loadBranches();
+
+if(!checkPermission("add")){
+document.getElementById("addCustomerBtn").style.display="none";
+}
