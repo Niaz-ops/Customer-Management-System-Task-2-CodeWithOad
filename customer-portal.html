@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
-<title>Branch - CMS</title>
+<title>Customer Portal - CMS</title>
+
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/branch.css">
+<link rel="stylesheet" href="css/customer-portal.css">
 
 </head>
 
 <body>
+
 <div class="container">
+
 <div class="sidebar">
+
 <h2>CMS</h2>
+
         <a href="dashboard.html">Dashboard</a>
         <a href="customers.html">Customers</a>
         <a href="installments.html">Installments</a>
@@ -24,40 +30,54 @@
         <a href="customer-portal.html">Customer Portal</a>
 
 </div>
+
+
 <div class="main">
-    <div class="topbar">
-    <h3>Branches</h3>
-    <button class="logout-btn" onclick="logout()">Logout</button>
-</div>
-<h2>Branch Management</h2>
-<div class="form">
 
-<input type="text" id="branchName" placeholder="Branch Name">
-<input type="text" id="branchCode" placeholder="Branch Code">
-<button onclick="addBranch()">Add Branch</button>
-
+<div class="topbar">
+<h3>Customer Portal</h3>
 </div>
 
-<h2>Branch List</h2>
-<table border="1" width="100%">
-<thead>
-<tr>
-<th>Serial</th>
-<th>Branch Name</th>
-<th>Branch Code</th>
-<th>Action</th>
-</tr>
-</thead>
-<tbody id="branchTable">
-</tbody>
-</table>
+
+<div class="portal-box">
+
+<h2>Customer Login</h2>
+
+
+<input 
+id="customerId"
+placeholder="Enter Customer ID">
+
+
+<input 
+id="mobile"
+placeholder="Enter Mobile Number">
+
+
+<button onclick="customerLogin()">
+Login
+</button>
+
+
+<p id="error"></p>
+
 </div>
+
+
+
+<div id="account" class="account-box">
+
 </div>
+
+
+</div>
+
+</div>
+
 
 <script src="script.js"></script>
-<script src="js/auth.js"></script>
-<script src="js/history.js"></script>
-<script src="js/branches.js"></script>
+<script src="js/customer-portal.js"></script>
 
 </body>
+
 </html>
