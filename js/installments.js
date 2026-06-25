@@ -23,6 +23,7 @@ customer.remaining = customer.totalAmount - totalPaid;
 localStorage.setItem("customers", JSON.stringify(customers));
 
 addHistory("Installment Received",id + " Rs " + amount);
+generateReceipt(customer, amount, date);
 
 alert("Payment added successfully");
 showHistory(customer);
@@ -35,4 +36,61 @@ box.innerHTML += `
 <p>${index + 1}. ${p.date} - Rs ${p.amount}</p>
 `;
 });
+}
+
+function generateReceipt(customer, amount, date){
+
+let receipt = `
+
+CUSTOMER MANAGEMENT SYSTEM
+
+Customer Name:
+${customer.name}
+
+Customer ID:
+${customer.id}
+
+Payment Date:
+${date}
+
+Amount Received:
+Rs ${amount}
+
+Remaining Balance:
+Rs ${customer.remaining}
+
+
+Thank you.
+
+`;
+
+localStorage.setItem(
+"lastReceipt",
+receipt
+);
+
+
+let openReceipt = confirm(
+" Print receipt?"
+);
+
+if(openReceipt){
+
+printWindow.print();
+printWindow.close();
+
+}
+
+let whatsapp =
+confirm("Send receipt on WhatsApp?");
+
+
+if(whatsapp){
+
+window.open(
+"https://wa.me/?text=" + message
+);
+
+}
+
 }
