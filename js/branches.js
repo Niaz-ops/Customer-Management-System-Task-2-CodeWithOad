@@ -36,16 +36,23 @@ table.innerHTML += `
 <td>${index+1}</td>
 <td>${b.name}</td>
 <td>${b.code}</td>
-<td><button onclick="deleteBranch(${b.id})">Delete</button></td>
+<td>${localStorage.getItem("role") === "Super Admin"?
+`<button onclick="deleteBranch(${b.id})">Delete</button>`:"View Only"
+}
+</td>
 </tr>
 `;
 });
 }
 
 function deleteBranch(id){
+let role = localStorage.getItem("role");
+if(role !== "Super Admin"){
+    alert("Only Super Admin can delete branches");
+    return;
+}
 branches = branches.filter((b)=>b.id !== id);
-localStorage.setItem("branches", JSON.stringify(branches)
-);
+localStorage.setItem("branches",JSON.stringify(branches));
 displayBranches();
 }
 displayBranches();
