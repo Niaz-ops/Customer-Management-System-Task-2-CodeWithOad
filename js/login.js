@@ -2,66 +2,127 @@ let users = JSON.parse(localStorage.getItem("users")) || [
 
 {
 username:"admin",
-password:btoa("12345"),
+password:"5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
 role:"Super Admin",
 attempts:0,
-lockedUntil:0
+locked:false
 },
 
 {
 username:"manager",
-password:btoa("1234"),
+password:"03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
 role:"Branch Manager",
 attempts:0,
-lockedUntil:0
+locked:false
 }
-
 ];
 
-localStorage.setItem("users", JSON.stringify(users));
 
-function login(){
-let username = document.getElementById("username").value;
-let password = document.getElementById("password").value;
-let users = JSON.parse(localStorage.getItem("users"));
-let user = users.find(u => u.username === username);
+
+localStorage.setItem(
+"users",
+JSON.stringify(users)
+);
+
+
+
+async function hashPassword(password){
+
+let data =
+new TextEncoder()
+.encode(password);
+
+
+let hash =
+await crypto.subtle.digest(
+"SHA-256",
+data
+);
+
+
+return Array.from(
+new Uint8Array(hash)
+)
+.map(
+b=>b.toString(16).padStart(2,"0")
+)
+.join("");
+
+}
+
+
+
+async function login(){
+
+
+let username =
+document.getElementById("username").value;
+
+
+let password =
+document.getElementById("password").value;
+
+
+
+let users =
+JSON.parse(
+localStorage.getItem("users")
+);
+
+
+
+let user =
+users.find(
+u=>u.username===username
+);
+
+
 
 if(!user){
 
 document.getElementById("error").innerText =
 "User not found";
 
-clearLoginFields();
+return;
+
+}
+
+
+
+if(user.locked){
+
+alert(
+"Account temporarily locked. Try again later"
+);
 
 return;
 
 }
-if(user.lockedUntil && Date.now() < user.lockedUntil){
 
-let remainingTime =
-Math.ceil((user.lockedUntil - Date.now()) / 1000);
 
-document.getElementById("error").innerText =
-"Account locked. Try again after " 
-+ remainingTime + " seconds";
 
-clearLoginFields();
+let hashedPassword =
+await hashPassword(password);
 
-return;
 
-}
-if(user.password === btoa(password)){
-user.attempts = 0;
-user.lockedUntil = 0;
+
+if(user.password === hashedPassword){
+
+
+user.attempts=0;
+
+
 localStorage.setItem(
 "login",
 "true"
 );
 
+
 localStorage.setItem(
 "role",
 user.role
 );
+
 
 localStorage.setItem(
 "currentUser",
@@ -74,48 +135,74 @@ localStorage.setItem(
 JSON.stringify(users)
 );
 
+
 window.location.href="dashboard.html";
 
+
 }
+
 else{
+
+
 user.attempts++;
-if(user.attempts >= 3){
-user.lockedUntil =
-Date.now() + 5000;
 
-user.attempts = 0;
 
-document.getElementById("error").innerText =
-"Too many attempts. Account locked for 5 seconds";
+if(user.attempts>=3){
 
-}
-else{
 
-document.getElementById("error").innerText =
-"Wrong username and password. Attempts left: "
-+
-(3-user.attempts);
+user.locked=true;
 
-}
+
+alert(
+"Account locked after 3 failed attempts"
+);
+
+
+
+setTimeout(()=>{
+
+
+user.locked=false;
+user.attempts=0;
+
 
 localStorage.setItem(
 "users",
 JSON.stringify(users)
 );
-clearLoginFields();
-}
+
+
+alert(
+"Account unlocked. Try login again"
+);
+
+
+},5000);
+
+
 
 }
 
-function clearLoginFields(){
+else{
 
-document.getElementById("username").value="";
-document.getElementById("password").value="";
+
+alert(
+"Wrong password. Attempts left: "
++
+(3-user.attempts)
+);
+
 
 }
 
-window.onload = function(){
-document.getElementById("username").value="";
-document.getElementById("password").value="";
 
-};
+
+localStorage.setItem(
+"users",
+JSON.stringify(users)
+);
+
+
+}
+
+}
