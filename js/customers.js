@@ -1,4 +1,5 @@
 let customers = JSON.parse(localStorage.getItem("customers")) || [];
+let branches = JSON.parse(localStorage.getItem("branches")) || [];
 let deletedCustomer = null;
 let undoContainer = null;
 let editId = null;
@@ -9,6 +10,7 @@ let name = document.getElementById("name").value;
 let father = document.getElementById("father").value;
 let mobile = document.getElementById("mobile").value;
 let city = document.getElementById("city").value;
+let branch = document.getElementById("branch").value;
 let previousId = document.getElementById("previousId").value;
 let date = document.getElementById("date").value;
 let totalItems = Number(document.getElementById("totalItems").value);
@@ -55,6 +57,7 @@ name,
 father,
 mobile,
 city,
+branch,
 date,
 totalItems,
 totalAmount,
@@ -96,6 +99,7 @@ table.innerHTML += `
 <td>${c.name}</td>
 <td>${c.mobile}</td>
 <td>${c.city}</td>
+<td>${c.branch || ""}</td>
 <td>${c.date}</td>
 <td>${c.totalItems}</td>
 <td>${c.totalAmount}</td>
@@ -201,3 +205,14 @@ filteredCustomers.forEach((c)=>{ table.innerHTML += `
 `;});
 
 }
+
+function loadBranches(){
+let branchSelect = document.getElementById("branch");
+branches.forEach(b=>{
+branchSelect.innerHTML += `
+<option value="${b.code}">${b.name}</option>
+`;
+});
+}
+
+loadBranches();
