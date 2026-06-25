@@ -21,6 +21,9 @@ let totalPaid = (customer.advance || 0) +
 customer.installments.reduce((sum, i) => sum + i.amount, 0);
 customer.remaining = customer.totalAmount - totalPaid;
 localStorage.setItem("customers", JSON.stringify(customers));
+
+addHistory("Installment Received",id + " Rs " + amount);
+
 alert("Payment added successfully");
 showHistory(customer);
 }

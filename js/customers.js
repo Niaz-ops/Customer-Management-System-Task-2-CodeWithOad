@@ -65,6 +65,10 @@ advance,
 remaining,
 installments: []
 };
+addHistory(
+"Add Customer",
+customer.name
+);
 customers.push(customer);
 serialNumber++;
 localStorage.setItem(
@@ -117,10 +121,15 @@ ${checkPermission("delete")?
 }
 let deletedIndex = null;
 function deleteCustomer(id){
+addHistory("Delete Customer",id);
 deletedIndex = customers.findIndex(c => c.id == id);
 deletedCustomer = customers[deletedIndex];
 customers.splice(deletedIndex,1);
 localStorage.setItem("customers",JSON.stringify(customers));
+addHistory(
+    "Customer Deleted",
+    customer.id
+);
 renderTable();
 showUndoButton();
 }
@@ -168,6 +177,10 @@ customers.splice(
     deletedCustomer
 );
 localStorage.setItem("customers",JSON.stringify(customers));
+addHistory(
+    "Customer Updated",
+    customer.id
+);
 renderTable();
 undoContainer.remove();
 };

@@ -1,8 +1,9 @@
 function logout(){
 
-    localStorage.removeItem("login");
-    localStorage.removeItem("role");
-    window.location.href="login.html";
+localStorage.removeItem("login");
+localStorage.removeItem("role");
+localStorage.removeItem("currentUser");
+window.location.href="login.html";
 
 }
 

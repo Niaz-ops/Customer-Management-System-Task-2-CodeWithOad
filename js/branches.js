@@ -23,6 +23,10 @@ code:code
 };
 branches.push(branch);
 localStorage.setItem("branches",JSON.stringify(branches));
+addHistory(
+    "Branch Created",
+    name + " (" + code + ")"
+);
 displayBranches();
 document.getElementById("branchName").value="";
 document.getElementById("branchCode").value="";
@@ -53,6 +57,10 @@ if(role !== "Super Admin"){
 }
 branches = branches.filter((b)=>b.id !== id);
 localStorage.setItem("branches",JSON.stringify(branches));
+addHistory(
+"Branch Deleted",
+id
+);
 displayBranches();
 }
 displayBranches();
