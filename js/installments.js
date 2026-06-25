@@ -41,8 +41,9 @@ box.innerHTML += `
 function generateReceipt(customer, amount, date){
 
 let receipt = `
-
+================================
 CUSTOMER MANAGEMENT SYSTEM
+================================
 
 Customer Name:
 ${customer.name}
@@ -59,37 +60,107 @@ Rs ${amount}
 Remaining Balance:
 Rs ${customer.remaining}
 
-
+================================
 Thank you.
-
+================================
 `;
 
+
+// Save last receipt
 localStorage.setItem(
-"lastReceipt",
-receipt
+    "lastReceipt",
+    receipt
 );
 
 
+// Print Receipt
 let openReceipt = confirm(
-" Print receipt?"
+    "Print receipt?"
 );
+
 
 if(openReceipt){
 
-printWindow.print();
-printWindow.close();
+    let printWindow = window.open(
+        "",
+        "_blank",
+        "width=600,height=700"
+    );
+
+
+    if(printWindow){
+
+        printWindow.document.write(`
+        <html>
+        <head>
+        <title>Payment Receipt</title>
+
+        <style>
+        body{
+            font-family: Arial;
+            padding:30px;
+        }
+
+        pre{
+            font-size:18px;
+        }
+
+        button{
+            padding:10px 20px;
+            background:green;
+            color:white;
+            border:none;
+            cursor:pointer;
+        }
+        </style>
+
+        </head>
+
+        <body>
+
+        <pre>${receipt}</pre>
+
+        </body>
+        </html>
+        `);
+
+
+        printWindow.document.close();
+
+        printWindow.focus();
+
+        printWindow.print();
+
+        printWindow.close();
+
+
+    }else{
+
+        alert(
+        "Popup blocked. Please allow popups."
+        );
+
+    }
 
 }
 
-let whatsapp =
-confirm("Send receipt on WhatsApp?");
 
+// WhatsApp Sharing
 
-if(whatsapp){
-
-window.open(
-"https://wa.me/?text=" + message
+let sendWhatsApp = confirm(
+    "Send receipt on WhatsApp?"
 );
+
+
+if(sendWhatsApp){
+
+    let message = encodeURIComponent(receipt);
+
+
+    window.open(
+        "https://wa.me/?text=" + message,
+        "_blank"
+    );
 
 }
 
