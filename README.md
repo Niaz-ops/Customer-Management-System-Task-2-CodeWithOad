@@ -345,7 +345,7 @@ Password: 12345
 
 # Developer
 
-**Developed as a Frontend Web Development Project**
+**Developed as a Frontend Web Development Project**<br>
 Developed by Sadia Samreen 24 Computer System
 Technologies:
 HTML | CSS | JavaScript
