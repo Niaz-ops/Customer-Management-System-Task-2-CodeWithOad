@@ -24,30 +24,76 @@
     </div>
     <div class="main">
 
-        <div class="topbar">
-            <h3>Dashboard</h3>
-            <button class="logout-btn" onclick="logout()">Logout</button>
-        </div>
+<div class="topbar">
+    <h3>Dashboard</h3>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+</div>
 
-        <div class="cards">
-            <div class="card">
-                <h4>Total Customers</h4>
-                <p id="totalCustomers">0</p>
-            </div>
-            <div class="card">
-                <h4>Total Amount</h4>
-                <p id="totalAmount">0</p>
-            </div>
-            <div class="card">
-                <h4>Received</h4>
-                <p id="received">0</p>
-            </div>
-            <div class="card">
-                <h4>Remaining</h4>
-                <p id="remaining">0</p>
-            </div>
-        </div>
-    </div>
+
+<h2>Business Overview</h2>
+
+<div class="dashboard-cards">
+
+<div class="dashboard-card">
+<h3>Total Customers</h3>
+<p id="totalCustomers">0</p>
+</div>
+
+<div class="dashboard-card">
+<h3>Total Sales</h3>
+<p id="totalSales">Rs 0</p>
+</div>
+
+<div class="dashboard-card">
+<h3>Total Received</h3>
+<p id="totalReceived">Rs 0</p>
+</div>
+
+<div class="dashboard-card">
+<h3>Remaining Balance</h3>
+<p id="totalRemaining">Rs 0</p>
+</div>
+
+<div class="dashboard-card">
+<h3>Total Installments</h3>
+<p id="totalInstallments">0</p>
+</div>
+
+<div class="dashboard-card">
+<h3>Today's Collection</h3>
+<p id="todayCollection">Rs 0</p>
+</div>
+
+</div>
+
+
+<h2>Recent Customers</h2>
+
+<table border="1" width="100%">
+
+<thead>
+
+<tr>
+
+<th>Customer ID</th>
+<th>Name</th>
+<th>Total Amount</th>
+<th>Remaining</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="recentCustomers">
+
+</tbody>
+
+
+</table>
+
+
+</div>
 </div>
 <script src="script.js"></script>
 <script src="js/dashboard.js"></script>
