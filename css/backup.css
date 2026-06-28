@@ -1,17 +1,61 @@
+/* Backup Page */
+
+.main h2{
+
+font-size:24px;
+margin-bottom:20px;
+color:#111;
+
+}
+
+.main{
+background:#f5f8fc;
+
+}
+.backup-card{
+background:white;
+padding:30px;
+border-radius:15px;
+border:1px solid #ddd;
+max-width:600px;
+box-shadow:0 2px 8px rgba(0,0,0,0.08);
+}
 .main button{
-padding:10px 20px;
-background:#111;
+padding:12px 25px;
+background:#0866ff;
 color:white;
 border:none;
+border-radius:8px;
 cursor:pointer;
-margin:10px;
+font-size:15px;
+margin:10px 0;
 
 }
+
 
 .main button:hover{
-background:green;
+
+background:#0052cc;
+
 }
 
+
+
 #restoreFile{
-margin:20px;
+
+padding:10px;
+background:white;
+border:1px solid #ddd;
+border-radius:8px;
+
+}
+
+
+
+#message{
+
+margin-top:15px;
+color:green;
+font-weight:bold;
+
 }

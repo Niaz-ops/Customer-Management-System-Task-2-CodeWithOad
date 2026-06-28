@@ -1,7 +1,7 @@
 let users = JSON.parse(localStorage.getItem("users")) || [
 
 {
-username:"admin",
+email:"bihanoor444@gmail.com",
 password:"5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
 role:"Super Admin",
 attempts:0,
@@ -9,12 +9,13 @@ locked:false
 },
 
 {
-username:"manager",
+email:"manager@gmail.com",
 password:"03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
 role:"Branch Manager",
 attempts:0,
 locked:false
 }
+
 ];
 
 
@@ -55,7 +56,7 @@ b=>b.toString(16).padStart(2,"0")
 async function login(){
 
 
-let username =
+let email  =
 document.getElementById("username").value;
 
 
@@ -73,7 +74,7 @@ localStorage.getItem("users")
 
 let user =
 users.find(
-u=>u.username===username
+u=>u.email===email
 );
 
 
@@ -126,7 +127,7 @@ user.role
 
 localStorage.setItem(
 "currentUser",
-user.username
+user.email
 );
 
 

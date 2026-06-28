@@ -12,52 +12,52 @@
 
 <body>
 
-<div class="container">
+<button class="hamburger" onclick="toggleSidebar()">☰</button>
+    <div class="layout">
+<aside class="sidebar" id="sidebar">
+   
+    <div class="logo">
+        <div class="logo-icon">I</div>
+        <button class="close-btn" onclick="closeSidebar()">✕</button>
+        <div>
+        <h3>Installment Pro</h3>
+        <p>Central Management</p>
+        </div>
+    </div>
+    <div class="profile">
+        <h4 id="userRole">Super Admin</h4>
+        <p> Administrator</p>
+        <span class="connected">● Connected</span>
+    </div>
+    <nav>
 
-<div class="sidebar">
-
-<h2>CMS</h2>
-
-        <a href="dashboard.html">Dashboard</a>
-        <a href="customers.html">Customers</a>
-        <a href="installments.html">Installments</a>
-        <a href="major-sheet.html">Major Sheet</a>
-        <a href="reports.html">Reports</a>
-        <a href="branches.html">Branches</a>
-        <a href="cleared.html">Cleared</a>
-        <a href="history.html">History</a>
-        <a href="backup.html">Backup</a>
-        <a href="customer-portal.html">Customer Portal</a>
-
-</div>
-
+        <a href="dashboard.html">▦ Dashboard</a>
+        <a href="customers.html">♙ Customer Profiles</a>
+        <a href="installments.html">💳 Installments</a>
+        <a href="major-sheet.html"> ▣ Major Ledger</a>
+        <a href="reports.html">📊 Reports</a>
+        <a href="branches.html"> ⚯ Branch Control</a>
+        <a href="cleared.html">✓ Cleared Accounts</a>
+        <a href="history.html">◉ Security & Audits</a>
+        <a href="backup.html"> 💾 Backup</a>
+        <a class="active" href="customer-portal.html">👤 Customer Portal</a>
+    </nav>
+    <button class="signout-btn" onclick="logout()">↪ Sign Out</button>
+</aside>
 
 <div class="main">
 
-<div class="topbar">
-<h3>Customer Portal</h3>
-</div>
-
-
 <div class="portal-box">
-
 <h2>Customer Login</h2>
-
-
 <input 
 id="customerId"
 placeholder="Enter Customer ID">
-
-
 <input 
 id="mobile"
 placeholder="Enter Mobile Number">
-
-
 <button onclick="customerLogin()">
 Login
 </button>
-
 
 <p id="error"></p>
 
@@ -74,7 +74,7 @@ Login
 
 </div>
 
-
+<script src="js/sidebar.js"></script>
 <script src="script.js"></script>
 <script src="js/customer-portal.js"></script>
 

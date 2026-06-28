@@ -1,94 +1,240 @@
 function logout(){
-    localStorage.removeItem("login");
-    localStorage.removeItem("role");
-    localStorage.removeItem("currentUser");
-    window.location.href="login.html";
+
+localStorage.removeItem("login");
+localStorage.removeItem("role");
+localStorage.removeItem("currentUser");
+
+window.location.href="login.html";
+
 }
-let customers = JSON.parse(localStorage.getItem("customers")) || [];
 
-function loadDashboard(){
-let totalAmount = 0;
-let received = 0;
-let remaining = 0;
-let installmentsCount = 0;
-let todayCollection = 0;
 
-let today = new Date()
-.toISOString()
-.split("T")[0];
 
-customers.forEach(c=>{
+document.addEventListener("DOMContentLoaded",function(){
 
-totalAmount += Number(c.totalAmount || 0);
-received += Number(c.advance || 0);
-remaining += Number(c.remaining || 0);
+
+let buttons=document.querySelectorAll(".filter-btn");
+
+
+buttons.forEach(btn=>{
+
+
+btn.addEventListener("click",function(){
+
+
+buttons.forEach(b=>{
+b.classList.remove("selected");
+});
+
+
+this.classList.add("selected");
+
+
+let filter=this.innerText;
+
+
+loadDashboard(filter);
+
+
+
+});
+
+
+});
+
+
+
+loadDashboard("All Branches");
+
+
+});
+
+
+
+
+
+function loadDashboard(filter){
+
+
+
+let customers =
+JSON.parse(localStorage.getItem("customers")) || [];
+
+
+
+let filteredCustomers =
+filterData(customers,filter);
+
+
+
+let items=0;
+let advance=0;
+let installments=0;
+let remaining=0;
+
+
+
+
+filteredCustomers.forEach(c=>{
+
+
+items += Number(c.totalItems || 0);
+
+
+advance += Number(c.advance || 0);
+
+
 
 if(c.installments){
+
+
 c.installments.forEach(i=>{
-installmentsCount++;
-received += Number(i.amount || 0);
 
-if(i.date === today){
-todayCollection += Number(i.amount || 0);
-}
+
+installments += Number(i.amount || 0);
+
+
 });
-}});
 
 
-if(document.getElementById("totalCustomers"))
-document.getElementById("totalCustomers").innerText =
-customers.length;
+}
 
-if(document.getElementById("totalAmount"))
-document.getElementById("totalAmount").innerText =
-"Rs. " + totalAmount.toLocaleString();
 
-if(document.getElementById("received"))
-document.getElementById("received").innerText =
-"Rs. " + received.toLocaleString();
 
-if(document.getElementById("remaining"))
+remaining += Number(c.remaining || 0);
+
+
+
+});
+
+
+
+let collection =
+advance + installments;
+
+
+
+
+document.getElementById("itemsSold").innerText =
+items;
+
+
+
+document.getElementById("advance").innerText =
+"Rs " + advance.toLocaleString();
+
+
+
+document.getElementById("installments").innerText =
+"Rs " + installments.toLocaleString();
+
+
+
+document.getElementById("collection").innerText =
+"Rs " + collection.toLocaleString();
+
+
+
 document.getElementById("remaining").innerText =
-"Rs. " + remaining.toLocaleString();
+"Rs " + remaining.toLocaleString();
 
-if(document.getElementById("totalSales"))
-document.getElementById("totalSales").innerText =
-"Rs. " + totalAmount.toLocaleString();
 
-if(document.getElementById("totalReceived"))
-document.getElementById("totalReceived").innerText =
-"Rs. " + received.toLocaleString();
 
-if(document.getElementById("totalRemaining"))
-document.getElementById("totalRemaining").innerText =
-"Rs. " + remaining.toLocaleString();
-
-if(document.getElementById("totalInstallments"))
-document.getElementById("totalInstallments").innerText =
-installmentsCount;
-
-if(document.getElementById("todayCollection"))
-document.getElementById("todayCollection").innerText =
-"Rs. " + todayCollection.toLocaleString();
-loadRecentCustomers();
 }
 
-function loadRecentCustomers(){
-let table = document.getElementById("recentCustomers");
 
-if(!table)
-return;
-table.innerHTML="";
-let recent = customers.slice(-5).reverse();
-recent.forEach(c=>{
-table.innerHTML += `
 
-<tr>
-<td>${c.id}</td>
-<td>${c.name}</td>
-<td>Rs. ${Number(c.totalAmount).toLocaleString()}</td>
-<td>Rs. ${Number(c.remaining).toLocaleString()}</td>
-</tr>
-`;});
+
+
+
+
+function filterData(customers,filter){
+
+
+
+let today = new Date();
+
+
+
+if(filter==="All Branches"){
+
+return customers;
+
 }
-loadDashboard();
+
+
+
+if(filter==="Daily"){
+
+
+return customers.filter(c=>{
+
+
+let date=new Date(c.date);
+
+
+return date.toDateString() === today.toDateString();
+
+
+});
+
+
+}
+
+
+
+
+
+if(filter==="10 Days"){
+
+
+
+return customers.filter(c=>{
+
+
+let date=new Date(c.date);
+
+
+let difference =
+(today-date)/(1000*60*60*24);
+
+
+
+return difference>=0 && difference<=10;
+
+
+});
+
+
+}
+
+
+
+
+
+if(filter==="Monthly"){
+
+
+
+return customers.filter(c=>{
+
+
+let date=new Date(c.date);
+
+
+return (
+
+date.getMonth()===today.getMonth()
+
+&&
+
+date.getFullYear()===today.getFullYear()
+
+);
+});
+}
+
+return customers;
+
+
+}
