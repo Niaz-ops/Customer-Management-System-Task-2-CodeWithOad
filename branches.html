@@ -1,76 +1,316 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<title>Branch - CMS</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Branch Management - CMS</title>
+
+
 <link rel="stylesheet" href="css/style.css">
+
 <link rel="stylesheet" href="css/branch.css">
+
 
 </head>
 
-<body>
-<button class="hamburger" onclick="toggleSidebar()">☰</button>
-    <div class="layout">
-<aside class="sidebar" id="sidebar">
-   
-    <div class="logo">
-        <div class="logo-icon">I</div>
-        <button class="close-btn" onclick="closeSidebar()">✕</button>
-        <div>
-        <h3>Installment Pro</h3>
-        <p>Central Management</p>
-        </div>
-    </div>
-    <div class="profile">
-        <h4 id="userRole">Super Admin</h4>
-        <p> Administrator</p>
-        <span class="connected">● Connected</span>
-    </div>
-    <nav>
 
-        <a href="dashboard.html">▦ Dashboard</a>
-        <a href="customers.html">♙ Customer Profiles</a>
-        <a href="installments.html">💳 Installments</a>
-        <a href="major-sheet.html"> ▣ Major Ledger</a>
-        <a href="reports.html">📊 Reports</a>
-        <a class="active"  href="branches.html"> ⚯ Branch Control</a>
-        <a href="cleared.html">✓ Cleared Accounts</a>
-        <a href="history.html">◉ Security & Audits</a>
-        <a href="backup.html"> 💾 Backup</a>
-        <a href="customer-portal.html">👤 Customer Portal</a>
-    </nav>
-    <button class="signout-btn" onclick="logout()">↪ Sign Out</button>
+<body>
+
+
+<button class="hamburger" onclick="toggleSidebar()">
+☰
+</button>
+
+
+
+<div class="layout">
+
+
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar" id="sidebar">
+
+
+<div class="logo">
+
+
+<div class="logo-icon">
+I
+</div>
+
+
+<button class="close-btn" onclick="closeSidebar()">
+✕
+</button>
+
+
+<div>
+
+<h3>
+Installment Pro
+</h3>
+
+
+<p>
+Central Management
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="profile">
+
+<h4 id="userRole">
+Super Admin
+</h4>
+
+
+<p>
+Administrator
+</p>
+
+
+<span class="connected">
+● Connected
+</span>
+
+
+</div>
+
+
+
+
+
+<nav>
+
+
+<a href="dashboard.html">
+▦ Dashboard
+</a>
+
+
+<a href="customers.html">
+♙ Customer Profiles
+</a>
+
+
+<a href="installments.html">
+💳 Installments
+</a>
+
+
+<a href="major-sheet.html">
+▣ Major Ledger
+</a>
+
+
+<a href="reports.html">
+📊 Reports
+</a>
+
+
+<a class="active" href="branches.html">
+⚯ Branch Control
+</a>
+
+
+<a href="cleared.html">
+✓ Cleared Accounts
+</a>
+
+
+<a href="history.html">
+◉ Security & Audits
+</a>
+
+
+<a href="backup.html">
+💾 Backup
+</a>
+
+
+<a href="customer-portal.html">
+👤 Customer Portal
+</a>
+
+
+
+</nav>
+
+
+
+
+
+<button class="signout-btn" onclick="logout()">
+
+↪ Sign Out
+
+</button>
+
+
+
 </aside>
 
+
+
+
+
 <div class="main">
-    
-<h2>Branch Management</h2>
-<div class="form">
 
-<input type="text" id="branchName" placeholder="Branch Name">
-<input type="text" id="branchCode" placeholder="Branch Code">
-<button onclick="addBranch()">Add Branch</button>
+
+
+<h2>
+Branch Management
+</h2>
+
+
+
+<div class="branch-summary">
+
+
+<div class="branch-card">
+
+<h3>
+Total Branches
+</h3>
+
+
+<p id="branchCount">
+0
+</p>
+
 
 </div>
 
-<h2>Branch List</h2>
-<table border="1" width="100%">
+
+</div>
+
+
+
+
+
+
+<div class="form-box">
+
+
+
+<input 
+type="text"
+id="branchName"
+placeholder="Enter Branch Name">
+
+
+
+<input 
+type="text"
+id="branchCode"
+placeholder="Enter Branch Code">
+
+
+
+<button 
+id="branchBtn"
+onclick="addBranch()">
+
+Add Branch
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+<input 
+type="text"
+id="branchSearch"
+placeholder="Search Branch..."
+onkeyup="searchBranch()">
+
+
+
+
+
+
+<h2>
+Branch List
+</h2>
+
+
+
+
+
+<table>
+
+
 <thead>
+
+
 <tr>
-<th>Serial</th>
-<th>Branch Name</th>
-<th>Branch Code</th>
-<th>Action</th>
+
+<th>
+Serial
+</th>
+
+
+<th>
+Branch Name
+</th>
+
+
+<th>
+Branch Code
+</th>
+
+
+<th>
+Action
+</th>
+
+
 </tr>
+
+
 </thead>
+
+
+
 <tbody id="branchTable">
+
+
 </tbody>
+
+
 </table>
+
+
+
+
+
 </div>
+
+
+
+
 </div>
 
 <script src="js/sidebar.js"></script>
 <script src="script.js"></script>
+<script src="js/setup.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/history.js"></script>
 <script src="js/branches.js"></script>

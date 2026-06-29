@@ -1,109 +1,431 @@
-let customers = JSON.parse(localStorage.getItem("customers")) || [];
-let branches = JSON.parse(localStorage.getItem("branches")) || [];
+let customers =
+JSON.parse(localStorage.getItem("customers")) || [];
+
+
+let branches =
+JSON.parse(localStorage.getItem("branches")) || [];
+
+
+
+let currentData = customers;
+
+
+
+// LOAD BRANCH DROPDOWN
+
+function loadBranchFilter(){
+
+
+let select =
+document.getElementById("branchFilter");
+
+
+branches.forEach(branch=>{
+
+
+select.innerHTML += `
+
+<option value="${branch.code}">
+${branch.name}
+</option>
+
+`;
+
+
+});
+
+
+}
+
+
+
+
+
+// LOAD REPORT
+
 
 function loadReports(data){
-let items = 0;
-let advance = 0;
-let installments = 0;
-let remaining = 0;
 
 
-let table = document.getElementById("reportTable");
+currentData=data;
+
+
+let table =
+document.getElementById("reportTable");
+
+
 table.innerHTML="";
 
-if(data.length === 0){
-table.innerHTML = `
+
+
+let items=0;
+
+let advance=0;
+
+let installments=0;
+
+let remaining=0;
+
+
+
+if(data.length===0){
+
+
+table.innerHTML=`
+
 <tr>
-<td colspan="7" style="text-align:center">No Records Found</td>
+
+<td colspan="9">
+
+No Records Found
+
+</td>
+
 </tr>
+
 `;
+
+
 }
-data.forEach(c=>{
-items += Number(c.totalItems);
-advance += Number(c.advance);
-let customerInstallments = 0;
-if(c.installments){
-c.installments.forEach(i=>{
-customerInstallments += Number(i.amount);
+
+
+
+
+data.forEach(customer=>{
+
+
+let paid=0;
+
+
+
+(customer.installments || [])
+.forEach(i=>{
+
+paid += Number(i.amount);
+
 });
-}
-installments += customerInstallments;
-remaining += Number(c.remaining);
+
+
+
+items += Number(customer.totalItems || 0);
+
+
+advance += Number(customer.advance || 0);
+
+
+installments += paid;
+
+
+remaining += Number(customer.remaining || 0);
+
+
+
 table.innerHTML += `
+
+
 <tr>
 
-<td>${c.date}</td>
-<td>${c.name}</td>
-<td>${c.totalItems}</td>
-<td>Rs ${Number(c.totalAmount).toLocaleString()}</td>
-<td>Rs ${Number(c.advance).toLocaleString()}</td>
-<td>Rs ${Number(customerInstallments).toLocaleString()}</td>
-<td>Rs ${Number(c.remaining).toLocaleString()}</td>
+
+<td>
+${customer.date}
+</td>
+
+
+<td>
+${customer.id}
+</td>
+
+
+<td>
+${customer.name}
+</td>
+
+
+<td>
+${customer.branch || "-"}
+</td>
+
+
+<td>
+${customer.totalItems}
+</td>
+
+
+<td>
+Rs ${customer.totalAmount}
+</td>
+
+
+<td>
+Rs ${customer.advance}
+</td>
+
+
+<td>
+Rs ${paid}
+</td>
+
+
+<td>
+Rs ${customer.remaining}
+</td>
+
 
 </tr>
+
+
+
 `;
-});
-document.getElementById("customersCount").innerText=data.length;
-document.getElementById("itemsSold").innerText=items;
-document.getElementById("advanceTotal").innerText=advance;
-document.getElementById("installmentTotal").innerText=installments;
-document.getElementById("remainingTotal").innerText=remaining;
-document.getElementById("branchCount").innerText = branches.length;
-document.getElementById("collectionTotal").innerText =
-advance + installments;
-}
-loadReports(customers);
-function activeButton(type){
 
-document.querySelectorAll(".report-filter button")
-.forEach(btn=>{
-    btn.classList.remove("active");
+
 });
 
-if(type==="daily"){
-document.getElementById("dailyBtn").classList.add("active");
+
+
+
+
+document.getElementById("customersCount").innerText=
+data.length;
+
+
+document.getElementById("itemsSold").innerText=
+items;
+
+
+document.getElementById("advanceTotal").innerText=
+advance;
+
+
+document.getElementById("installmentTotal").innerText=
+installments;
+
+
+document.getElementById("remainingTotal").innerText=
+remaining;
+
+
+
+document.getElementById("collectionTotal").innerText=
+advance+installments;
+
+
 }
 
-if(type==="10days"){
-document.getElementById("tenDaysBtn").classList.add("active");
-}
 
-if(type==="monthly"){
-document.getElementById("monthlyBtn").classList.add("active");
-}
 
-if(type==="all"){
-document.getElementById("allBtn").classList.add("active");
-}
 
-}
+
+
+// DATE FILTERS
+
+
 function filterReport(type){
-activeButton(type);
-let today = new Date();
-let filtered = customers.filter(c=>{
-let purchaseDate = new Date(c.date);
+
+
+
+let today=new Date();
+
+
+
+let result=customers.filter(c=>{
+
+
+let date=new Date(c.date);
+
+
 
 if(type==="daily"){
-    return (
-    purchaseDate.getDate() === today.getDate() &&
-    purchaseDate.getMonth() === today.getMonth() &&
-    purchaseDate.getFullYear() === today.getFullYear()
-    );
+
+
+return date.toDateString()
+===
+today.toDateString();
+
+
 }
+
+
+
 if(type==="10days"){
-let difference =
-(today - purchaseDate)/(1000*60*60*24);
-return difference >=0 && difference <=10;
+
+
+let diff=
+(today-date)
+/86400000;
+
+
+return diff>=0 && diff<=10;
+
+
 }
+
+
+
+
 if(type==="monthly"){
-return purchaseDate.getMonth() === today.getMonth()
+
+
+return date.getMonth()
+===
+today.getMonth()
 &&
-purchaseDate.getFullYear() === today.getFullYear();
+date.getFullYear()
+===
+today.getFullYear();
+
+
 }
+
+
+
 return true;
+
+
+
 });
-loadReports(filtered);
+
+
+
+document.getElementById("reportTitle")
+.innerText=
+type.toUpperCase()+" REPORT";
+
+
+
+loadReports(result);
+
+
+
 }
+
+
+
+
+
+// BRANCH REPORT
+
+
+function filterBranchReport(){
+
+
+let branch=
+document.getElementById("branchFilter")
+.value;
+
+
+
+if(branch==="all"){
+
+
+loadReports(customers);
+
+return;
+
+
+}
+
+
+
+let data =
+customers.filter(c=>
+c.branch===branch
+);
+
+
+
+let name =
+document.querySelector(
+"#branchFilter option:checked"
+).text;
+
+
+
+document.getElementById("reportTitle")
+.innerText=
+name+" REPORT";
+
+
+
+loadReports(data);
+
+
+
+}
+
+
+
+
+
+
+// SEARCH
+
+
+function searchReport(){
+
+
+let value =
+document.getElementById("searchReport")
+.value
+.toLowerCase();
+
+
+
+let data =
+currentData.filter(c=>
+
+
+c.name.toLowerCase()
+.includes(value)
+
+
+||
+
+c.id.toLowerCase()
+.includes(value)
+
+
+||
+
+(c.branch||"")
+.toLowerCase()
+.includes(value)
+
+
+
+);
+
+
+
+loadReports(data);
+
+
+}
+
+
+
+
+
+
+
 function printReport(){
-    window.print();
+
+window.print();
+
 }
+
+
+
+
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+
+loadBranchFilter();
+
+
+loadReports(customers);
+
+
+});

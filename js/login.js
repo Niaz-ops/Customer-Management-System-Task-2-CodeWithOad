@@ -1,37 +1,80 @@
-let users = JSON.parse(localStorage.getItem("users")) || [
+/* ================= LOGIN SYSTEM ================= */
+
+
+
+let defaultUsers = [
 
 {
+
 email:"bihanoor444@gmail.com",
-password:"5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
+
+password:
+"5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
+
 role:"Super Admin",
+
 attempts:0,
-locked:false
+
+locked:false,
+
+lastLogin:null
+
 },
 
+
+
 {
+
 email:"manager@gmail.com",
-password:"03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+
+password:
+"03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+
 role:"Branch Manager",
+
 attempts:0,
-locked:false
+
+locked:false,
+
+lastLogin:null
+
 }
+
 
 ];
 
 
 
+
+
+let users =
+JSON.parse(localStorage.getItem("users"));
+
+
+
+if(!users){
+
+
 localStorage.setItem(
 "users",
-JSON.stringify(users)
+JSON.stringify(defaultUsers)
 );
+
+
+}
+
+
+
+
 
 
 
 async function hashPassword(password){
 
+
 let data =
-new TextEncoder()
-.encode(password);
+new TextEncoder().encode(password);
+
 
 
 let hash =
@@ -41,27 +84,91 @@ data
 );
 
 
+
 return Array.from(
 new Uint8Array(hash)
 )
+
 .map(
 b=>b.toString(16).padStart(2,"0")
 )
+
 .join("");
 
 }
 
 
 
+
+
+function togglePassword(){
+
+
+let pass =
+document.getElementById("password");
+
+
+
+if(pass.type==="password")
+
+pass.type="text";
+
+
+else
+
+pass.type="password";
+
+
+}
+
+
+
+
+
+
+
+
+
 async function login(){
 
 
-let email  =
-document.getElementById("username").value;
+
+let email =
+document.getElementById("username")
+.value.trim();
+
 
 
 let password =
-document.getElementById("password").value;
+document.getElementById("password")
+.value.trim();
+
+
+
+
+
+let error =
+document.getElementById("error");
+
+
+
+error.innerHTML="";
+
+
+
+
+if(email==="" || password===""){
+
+
+error.innerHTML =
+"Please enter email and password";
+
+
+return;
+
+}
+
+
 
 
 
@@ -79,38 +186,64 @@ u=>u.email===email
 
 
 
+
+
 if(!user){
 
-document.getElementById("error").innerText =
-"User not found";
+
+error.innerHTML =
+"Account not found";
+
 
 return;
 
+
 }
+
+
+
+
 
 
 
 if(user.locked){
 
-alert(
-"Account temporarily locked. Try again later"
-);
+
+error.innerHTML =
+"Account temporarily locked";
+
 
 return;
+
 
 }
 
 
 
-let hashedPassword =
+
+
+
+
+let hashed =
 await hashPassword(password);
 
 
 
-if(user.password === hashedPassword){
+
+
+
+if(user.password===hashed){
+
 
 
 user.attempts=0;
+
+
+user.lastLogin =
+new Date()
+.toLocaleString();
+
+
 
 
 localStorage.setItem(
@@ -119,10 +252,12 @@ localStorage.setItem(
 );
 
 
+
 localStorage.setItem(
 "role",
 user.role
 );
+
 
 
 localStorage.setItem(
@@ -131,13 +266,59 @@ user.email
 );
 
 
+
+
 localStorage.setItem(
 "users",
 JSON.stringify(users)
 );
 
 
-window.location.href="dashboard.html";
+
+
+
+// Login history
+
+
+let history =
+JSON.parse(
+localStorage.getItem("history")
+)||[];
+
+
+
+
+history.push({
+
+action:"Login",
+
+user:user.email,
+
+role:user.role,
+
+details:"Successful login",
+
+date:new Date()
+.toLocaleString()
+
+});
+
+
+
+localStorage.setItem(
+"history",
+JSON.stringify(history)
+);
+
+
+
+
+
+
+window.location.href=
+"dashboard.html";
+
+
 
 
 }
@@ -145,7 +326,11 @@ window.location.href="dashboard.html";
 else{
 
 
+
 user.attempts++;
+
+
+
 
 
 if(user.attempts>=3){
@@ -154,16 +339,15 @@ if(user.attempts>=3){
 user.locked=true;
 
 
-alert(
-"Account locked after 3 failed attempts"
-);
-
+error.innerHTML=
+"Account locked after 3 attempts";
 
 
 setTimeout(()=>{
 
 
 user.locked=false;
+
 user.attempts=0;
 
 
@@ -173,13 +357,7 @@ JSON.stringify(users)
 );
 
 
-alert(
-"Account unlocked. Try login again"
-);
-
-
 },5000);
-
 
 
 }
@@ -187,11 +365,11 @@ alert(
 else{
 
 
-alert(
+error.innerHTML=
+
 "Wrong password. Attempts left: "
 +
-(3-user.attempts)
-);
+(3-user.attempts);
 
 
 }
@@ -203,6 +381,26 @@ localStorage.setItem(
 JSON.stringify(users)
 );
 
+
+
+}
+
+
+}
+function togglePassword(){
+
+let password =
+document.getElementById("password");
+
+
+if(password.type==="password"){
+
+password.type="text";
+
+}
+else{
+
+password.type="password";
 
 }
 

@@ -1,31 +1,233 @@
-/*========== History Page ==========*/
-#searchHistory{
-width:400px;
-padding:10px;
-margin:20px 0;
-border:1px solid #ccc;
-border-radius:5px;
-font-size:16px;
+.main h2{
+
+font-size:28px;
+
+margin-bottom:10px;
+
 }
+
+
+
+.description{
+
+color:#666;
+
+}
+
+
+
+
+
+.audit-summary{
+
+
+margin:20px 0;
+
+
+}
+
+
+.audit-summary div{
+
+
+background:white;
+
+width:220px;
+
+padding:20px;
+
+border-radius:15px;
+
+box-shadow:
+0 5px 15px rgba(0,0,0,.1);
+
+
+}
+
+
+
+.audit-summary h3{
+
+font-size:16px;
+
+color:#555;
+
+}
+
+
+
+.audit-summary p{
+
+
+font-size:32px;
+
+font-weight:bold;
+
+color:#3d40ce;
+
+
+}
+
+
+
+
+
+.controls{
+
+
+display:flex;
+
+gap:10px;
+
+flex-wrap:wrap;
+
+margin:20px 0;
+
+
+}
+
+
+
+
+.controls input,
+.controls select{
+
+
+padding:12px;
+
+border-radius:8px;
+
+border:1px solid #ddd;
+
+
+}
+
+
+
+
+
+button{
+
+
+padding:10px 15px;
+
+border:none;
+
+border-radius:8px;
+
+background:#3d40ce;
+
+color:white;
+
+cursor:pointer;
+
+
+}
+
+
+
+
+button:hover{
+
+opacity:.8;
+
+}
+
+
+
+.danger{
+
+
+background:#dc3545;
+
+}
+
+
+
+
 
 table{
+
+
+width:100%;
+
 background:white;
+
 border-collapse:collapse;
+
+box-shadow:
+0 5px 15px rgba(0,0,0,.1);
+
+
 }
 
-table th{
+
+
+
+th{
+
+
 background:#3d40ce;
+
 color:white;
-padding:10px;
-}
 
-table td{
-padding:10px;
-border-bottom:1px solid #ddd;
+padding:12px;
+
 
 }
 
-table tr:hover{
-background:#f2f2f2;
+
+
+
+td{
+
+
+padding:12px;
+
+border-bottom:1px solid #eee;
+
+
+}
+
+
+
+
+
+tr:hover{
+
+
+background:#f5f8ff;
+
+
+}
+
+
+
+
+
+@media(max-width:700px){
+
+
+table{
+
+
+display:block;
+
+overflow-x:auto;
+
+
+}
+
+
+
+.controls input,
+.controls select{
+
+
+width:100%;
+
+
+}
+
 
 }

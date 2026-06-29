@@ -1,6 +1,11 @@
 let historyData =
-JSON.parse(localStorage.getItem("history")) || [];
+JSON.parse(localStorage.getItem("history"))
+|| [];
 
+
+
+
+// DISPLAY HISTORY
 
 
 function loadHistory(data = historyData){
@@ -14,14 +19,25 @@ table.innerHTML="";
 
 
 
+document.getElementById("historyCount")
+.innerText=data.length;
+
+
+
+
 if(data.length===0){
+
 
 table.innerHTML=`
 
 <tr>
+
 <td colspan="7">
-No History Found
+
+No Activity Found
+
 </td>
+
 </tr>
 
 `;
@@ -32,36 +48,74 @@ return;
 
 
 
-data.forEach((h,index)=>{
 
 
-table.innerHTML += `
+data.slice().reverse()
+.forEach((h,index)=>{
+
+
+
+table.innerHTML +=`
+
 
 <tr>
 
-<td>${index+1}</td>
 
-<td>${h.action}</td>
+<td>
+${index+1}
+</td>
 
-<td>${h.user || "Unknown"}</td>
 
-<td>${h.role || "-"}</td>
 
-<td>${h.details}</td>
+<td>
+${h.action}
+</td>
 
-<td>${h.date}</td>
+
+
+<td>
+${h.user}
+</td>
+
+
+
+<td>
+${h.role}
+</td>
+
+
+
+<td>
+${h.details}
+</td>
+
+
+
+<td>
+${h.date}
+</td>
+
 
 
 <td>
 
+
+
 ${
-localStorage.getItem("role")==="Super Admin"
+localStorage.getItem("role")
+==="Super Admin"
 
 ?
 
-`<button onclick="deleteHistory(${index})">
+`
+
+<button onclick="deleteHistory(${h.id})">
+
 Delete
-</button>`
+
+</button>
+
+`
 
 :
 
@@ -69,80 +123,113 @@ Delete
 
 }
 
+
+
 </td>
 
 
 </tr>
 
+
+
 `;
 
+
+
 });
+
 
 
 }
 
 
 
-function deleteHistory(index){
 
 
-if(localStorage.getItem("role") !== "Super Admin"){
+
+
+
+// DELETE ONE RECORD
+
+
+function deleteHistory(id){
+
+
+
+if(localStorage.getItem("role")
+!=="Super Admin"){
+
 
 alert(
 "Only Super Admin can delete history"
 );
 
+
 return;
+
 
 }
 
 
-let confirmDelete =
-confirm("Delete this history record?");
 
 
-if(!confirmDelete){
-return;
-}
-
-
-
-historyData.splice(index,1);
-
-
-localStorage.setItem(
-"history",
-JSON.stringify(historyData)
+historyData =
+historyData.filter(
+h=>h.id!==id
 );
+
+
+
+saveHistory();
 
 
 loadHistory();
 
+
+
 }
 
 
+
+
+
+
+
+
+// CLEAR ALL
 
 
 function clearAllHistory(){
 
 
-if(localStorage.getItem("role") !== "Super Admin"){
+
+if(localStorage.getItem("role")
+!=="Super Admin"){
+
 
 alert(
 "Only Super Admin can clear history"
 );
 
+
 return;
 
 }
 
 
-if(!confirm("Delete all history?")){
+
+if(!confirm(
+"Delete complete audit history?"
+))
+
 return;
-}
 
 
-localStorage.removeItem("history");
+
+localStorage.removeItem(
+"history"
+);
+
 
 
 historyData=[];
@@ -150,40 +237,50 @@ historyData=[];
 
 loadHistory();
 
+
+
 }
 
 
+
+
+
+
+
+
+// SEARCH
 
 
 function searchHistory(){
 
 
 let value =
-document.getElementById("searchHistory")
+document.getElementById(
+"searchHistory"
+)
 .value
 .toLowerCase();
 
 
 
-let filtered = historyData.filter(h=>{
+
+let filtered =
+historyData.filter(h=>{
 
 
-return (
+return(
 
-(h.user || "")
-.toLowerCase()
+h.action.toLowerCase()
 .includes(value)
 
 ||
 
-(h.action || "")
-.toLowerCase()
+h.user.toLowerCase()
 .includes(value)
 
 ||
 
-(h.details || "")
-.toLowerCase()
+h.details.toLowerCase()
 .includes(value)
 
 );
@@ -191,11 +288,79 @@ return (
 
 });
 
-
 loadHistory(filtered);
-
 
 }
 
+// FILTER ACTION
+function filterAction(){
 
+let value =
+document.getElementById(
+"actionFilter"
+)
+.value;
+if(value==="all"){
+loadHistory(historyData);
+return;
+}
+let filtered =
+historyData.filter(
+h=>h.action===value
+);
+
+loadHistory(filtered);
+
+}
+
+function saveHistory(){
+localStorage.setItem(
+
+"history",
+
+JSON.stringify(historyData)
+
+);
+}
+
+// PRINT
+
+
+function printHistory(){
+
+window.print();
+
+}// EXPORT JSON
+
+
+function exportHistory(){
+
+
+
+let file =
+new Blob(
+
+[
+JSON.stringify(
+historyData,
+null,
+2
+)
+],
+
+{
+type:"application/json"
+}
+
+);
+
+let link =
+document.createElement("a");
+
+link.href =
+URL.createObjectURL(file);
+link.download =
+"CMS-Audit-History.json";
+link.click();
+}
 loadHistory();

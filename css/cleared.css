@@ -1,30 +1,421 @@
-/*========== Cleared Customers ==========*/
+/* ===============================
+   CLEARED CUSTOMERS PAGE
+   =============================== */
+
+
+.main h2{
+
+    font-size:28px;
+    color:#1f2937;
+    margin-bottom:15px;
+
+}
+
+
+.main h3{
+
+    margin-top:25px;
+    margin-bottom:15px;
+    color:#374151;
+
+}
+
+
+/* ===============================
+   NEW PURCHASE SECTION
+   =============================== */
+
+
+.main input{
+
+    padding:12px;
+    width:250px;
+    margin:5px;
+
+    border:1px solid #d1d5db;
+    border-radius:8px;
+
+    outline:none;
+    font-size:14px;
+
+}
+
+
+
+.main input:focus{
+
+    border-color:#3d40ce;
+
+}
+
+
+
+
+
+/* ===============================
+   BUTTONS
+   =============================== */
+
+
+button{
+
+    padding:10px 16px;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    background:#3d40ce;
+
+    color:white;
+
+    font-size:14px;
+
+    margin:5px;
+
+    transition:.3s;
+
+}
+
+
+
+button:hover{
+
+    background:#2527a8;
+
+}
+
+
+
+
+/* Reopen Button */
+
+button[onclick*="reopenCustomer"]{
+
+    background:#16a34a;
+
+}
+
+
+
+button[onclick*="reopenCustomer"]:hover{
+
+    background:#15803d;
+
+}
+
+
+
+
+/* Print Button */
+
+
+button[onclick*="printHistory"]{
+
+    background:#2563eb;
+
+}
+
+
+
+button[onclick*="printHistory"]:hover{
+
+    background:#1d4ed8;
+
+}
+
+
+
+
+
+/* PDF Button */
+
+
+button[onclick*="downloadPDF"]{
+
+    background:#dc2626;
+
+}
+
+
+
+button[onclick*="downloadPDF"]:hover{
+
+    background:#b91c1c;
+
+}
+
+
+
+
+
+
+/* ===============================
+   TABLE DESIGN
+   =============================== */
+
+
 table{
-background:white;
-border-collapse:collapse;
-margin-top:20px;
+
+
+    width:100%;
+
+    margin-top:25px;
+
+    background:white;
+
+    border-collapse:collapse;
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+    box-shadow:
+
+    0 5px 15px rgba(0,0,0,.08);
+
+
 }
 
-table th{
-background:#3d40ce;
-color:white;
-padding:10px;
+
+
+
+thead{
+
+
+    background:#3d40ce;
+
+    color:white;
+
+
 }
 
-table td{
-padding:10px;
-border-bottom:1px solid #ddd;
+
+
+
+
+th{
+
+
+    padding:14px;
+
+    text-align:left;
+
+    font-size:14px;
+
+
 }
 
-table button{
-background:green;
-color:white;
-border:none;
-padding:8px 15px;
-cursor:pointer;
-border-radius:5px;
+
+
+
+td{
+
+
+    padding:12px;
+
+    border-bottom:1px solid #eeeeee;
+
+    color:#374151;
+
+    vertical-align:top;
+
+
 }
 
-table button:hover{
-background:darkgreen;
+
+
+
+tbody tr:hover{
+
+
+    background:#f5f8ff;
+
+
+}
+
+
+
+
+
+
+/* Payment History */
+
+
+td p{
+
+
+    margin:5px 0;
+
+    padding:5px;
+
+    background:#f8fafc;
+
+    border-radius:5px;
+
+    font-size:13px;
+
+
+}
+
+
+
+
+
+
+/* ===============================
+   EMPTY MESSAGE
+   =============================== */
+
+
+td[colspan]{
+
+
+    text-align:center;
+
+    padding:30px;
+
+    color:#6b7280;
+
+    font-size:16px;
+
+
+}
+
+
+
+
+
+/* ===============================
+   PRINT REPORT
+   =============================== */
+
+
+@media print{
+
+
+.sidebar,
+.hamburger,
+button,
+input,
+h3{
+
+
+    display:none !important;
+
+
+}
+
+
+
+.main{
+
+
+    padding:0;
+
+}
+
+
+
+table{
+
+
+    box-shadow:none;
+
+}
+
+
+
+}
+
+
+
+
+
+/* ===============================
+   RESPONSIVE DESIGN
+   =============================== */
+
+
+@media(max-width:900px){
+
+
+table{
+
+
+    display:block;
+
+    overflow-x:auto;
+
+    white-space:nowrap;
+
+
+}
+
+
+
+}
+
+
+
+@media(max-width:700px){
+
+
+
+.main h2{
+
+    font-size:22px;
+
+}
+
+
+
+.main input{
+
+
+    width:100%;
+
+    margin:8px 0;
+
+
+}
+
+
+
+button{
+
+
+    width:100%;
+
+    margin:8px 0;
+
+
+}
+
+
+
+
+table{
+
+
+    font-size:13px;
+
+
+}
+
+
+
+th,
+td{
+
+
+    padding:10px;
+
+
+}
+
+
+
 }

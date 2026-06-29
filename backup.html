@@ -4,70 +4,302 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Backup - CMS</title>
+<title>
+Backup Management - CMS
+</title>
+
 
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/backup.css">
 
+
 </head>
+
+
 <body>
-    <button class="hamburger" onclick="toggleSidebar()">☰</button>
-    <div class="layout">
+
+
+<button class="hamburger" onclick="toggleSidebar()">
+☰
+</button>
+
+
+
+<div class="layout">
+
+
+
+<!-- ================= SIDEBAR ================= -->
+
 <aside class="sidebar" id="sidebar">
-   
-    <div class="logo">
-        <div class="logo-icon">I</div>
-        <button class="close-btn" onclick="closeSidebar()">✕</button>
-        <div>
-        <h3>Installment Pro</h3>
-        <p>Central Management</p>
-        </div>
-    </div>
-    <div class="profile">
-        <h4 id="userRole">Super Admin</h4>
-        <p> Administrator</p>
-        <span class="connected">● Connected</span>
-    </div>
-    <nav>
-
-        <a href="dashboard.html">▦ Dashboard</a>
-        <a href="customers.html">♙ Customer Profiles</a>
-        <a href="installments.html">💳 Installments</a>
-        <a href="major-sheet.html"> ▣ Major Ledger</a>
-        <a href="reports.html">📊 Reports</a>
-        <a href="branches.html"> ⚯ Branch Control</a>
-        <a href="cleared.html">✓ Cleared Accounts</a>
-        <a href="history.html">◉ Security & Audits</a>
-        <a class="active" href="backup.html"> 💾 Backup</a>
-        <a href="customer-portal.html">👤 Customer Portal</a>
-    </nav>
-    <button class="signout-btn" onclick="logout()">↪ Sign Out</button>
-</aside>
-
-<main class="main">
 
 
-<div class="backup-card">
-<h2>💾 Data Backup</h2>
+<div class="logo">
 
-<p>Download complete system data backup.</p>
-<button onclick="backupData()">Download Backup</button>
+<div class="logo-icon">
+I
+</div>
 
-<hr>
-<h2>♻ Restore Data</h2>
-<p>Upload previous backup file.</p>
-<input type="file" id="restoreFile">
-<button onclick="restoreData()">Restore Backup</button>
-<p id="message"></p>
+
+<button class="close-btn" onclick="closeSidebar()">
+✕
+</button>
+
+
+<div>
+
+<h3>
+Installment Pro
+</h3>
+
+<p>
+Central Management
+</p>
 
 </div>
-</main>
+
+
+</div>
+
+
+
+
+
+<div class="profile">
+
+<h4 id="userRole">
+Super Admin
+</h4>
+
+<p>
+Administrator
+</p>
+
+<span class="connected">
+● Connected
+</span>
+
+
+</div>
+
+
+
+
+
+<nav>
+
+
+<a href="dashboard.html">
+▦ Dashboard
+</a>
+
+
+<a href="customers.html">
+♙ Customer Profiles
+</a>
+
+
+<a href="installments.html">
+💳 Installments
+</a>
+
+
+
+<a href="major-sheet.html">
+▣ Major Ledger
+</a>
+
+
+
+<a href="reports.html">
+📊 Reports
+</a>
+
+
+
+<a href="branches.html">
+⚯ Branch Control
+</a>
+
+
+
+<a href="cleared.html">
+✓ Cleared Accounts
+</a>
+
+
+
+<a href="history.html">
+◉ Security & Audits
+</a>
+
+
+
+<a class="active" href="backup.html">
+💾 Backup
+</a>
+
+
+
+<a href="customer-portal.html">
+👤 Customer Portal
+</a>
+
+
+
+</nav>
+
+
+
+
+
+<button class="signout-btn" onclick="logout()">
+
+↪ Sign Out
+
+</button>
+
+
+
+</aside>
+
+
+
+
+
+<!-- ================= MAIN CONTENT ================= -->
+
+
+<div class="main">
+
+
+
+<div class="backup-container">
+
+
+
+<h2>
+💾 Backup & Restore Management
+</h2>
+
+
+
+<p class="description">
+
+Securely manage CMS data backup and recovery.
+
+</p>
+
+
+
+
+
+<div class="backup-grid">
+
+
+
+
+
+<!-- BACKUP CARD -->
+
+
+<div class="backup-box">
+
+
+<div class="icon">
+📥
+</div>
+
+
+<h3>
+Create Backup
+</h3>
+
+
+
+<p>
+
+Download complete system data including:
+
+</p>
+
+
+<ul>
+
+<li>Customers Records</li>
+
+<li>Branch Information</li>
+
+<li>User Accounts</li>
+
+<li>Audit History</li>
+
+</ul>
+
+
+
+<button onclick="backupData()">
+
+Download Backup
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- RESTORE CARD -->
+
+
+<div class="backup-box">
+
+
+<div class="icon">
+♻️
+</div>
+
+
+<h3>
+Restore Backup
+</h3>
+
+
+
+<p>
+
+Upload previous CMS backup file.
+</p>
+<input 
+type="file"
+id="restoreFile"
+accept=".json"
+>
+<button onclick="restoreData()">Restore Data</button>
+</div>
+</div>
+<div id="message">
+</div>
+<div class="warning">
+⚠ Warning:
+<br>
+Restoring backup will replace existing system data.
+Make sure you have a current backup before restoring.
+</div>
+</div>
+</div>
 </div>
 <script src="js/sidebar.js"></script>
 <script src="script.js"></script>
+<script src="js/setup.js"></script>
 <script src="js/auth.js"></script>
+<script src="js/history.js"></script>
 <script src="js/backup.js"></script>
 </body>
-
 </html>

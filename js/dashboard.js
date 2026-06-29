@@ -1,72 +1,27 @@
-function logout(){
-
-localStorage.removeItem("login");
-localStorage.removeItem("role");
-localStorage.removeItem("currentUser");
-
-window.location.href="login.html";
-
-}
-
-
-
 document.addEventListener("DOMContentLoaded",function(){
-
-
 let buttons=document.querySelectorAll(".filter-btn");
-
-
 buttons.forEach(btn=>{
-
-
 btn.addEventListener("click",function(){
-
-
 buttons.forEach(b=>{
 b.classList.remove("selected");
 });
-
-
 this.classList.add("selected");
-
-
 let filter=this.innerText;
 
 
 loadDashboard(filter);
-
-
-
 });
-
-
 });
-
-
-
 loadDashboard("All Branches");
 
 
 });
 
-
-
-
-
 function loadDashboard(filter){
-
-
-
 let customers =
 JSON.parse(localStorage.getItem("customers")) || [];
-
-
-
 let filteredCustomers =
 filterData(customers,filter);
-
-
-
 let items=0;
 let advance=0;
 let installments=0;

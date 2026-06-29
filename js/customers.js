@@ -1,6 +1,28 @@
 let serialNumber = JSON.parse(localStorage.getItem("serialNumber")) || 1;
 let customers = JSON.parse(localStorage.getItem("customers")) || [];
+
+// ================= Default Branch =================
+
 let branches = JSON.parse(localStorage.getItem("branches")) || [];
+
+
+if(branches.length === 0){
+
+    branches = [
+        {
+            code:"BR001",
+            name:"Main Branch"
+        }
+    ];
+
+
+    localStorage.setItem(
+        "branches",
+        JSON.stringify(branches)
+    );
+
+}
+
 
 let deletedCustomer = null;
 let deletedIndex = null;
@@ -25,8 +47,14 @@ let advance = Number(document.getElementById("advance").value);
 
 if(name==="" || father==="" || mobile==="" || city==="" || date===""){
 
-alert("Please fill required fields");
+let confirmSave =
+confirm(
+"Some fields are empty. Do you want to save anyway?"
+);
+
+if(!confirmSave){
 return;
+}
 
 }
 
@@ -471,37 +499,18 @@ document.getElementById("undoRow").remove();
 
 
 },5000);
-
-
 }
-
-
-
-
 // ================= SEARCH =================
-
-
 function searchCustomer(){
-
-
 let value =
 document.getElementById("searchInput")
 .value
 .toLowerCase();
 
-
-
 let table =
 document.getElementById("customerTable");
-
-
 table.innerHTML="";
-
-
-
 customers.filter(c=>{
-
-
 return(
 
 c.name.toLowerCase().includes(value)

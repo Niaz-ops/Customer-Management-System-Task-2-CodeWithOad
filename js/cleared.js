@@ -32,7 +32,11 @@ table.innerHTML +=`
 <td>${c.mobile}</td>
 <td>Rs ${Number(c.totalAmount).toLocaleString()}</td>
 <td>${history}</td>
-<td><button onclick="reopenCustomer('${c.id}')">Reopen</button></td>
+<td>
+<button onclick="printHistory('${c.id}')">Print</button>
+<button onclick="downloadPDF('${c.id}')">PDF</button>
+<button onclick="reopenCustomer('${c.id}')">Reopen</button>
+</td>
 </tr>
 `;
 });
@@ -81,3 +85,150 @@ loadClearedCustomers();
 
 }
 loadClearedCustomers();
+
+function saveNewPurchase(){
+
+let id = prompt("Enter Customer ID");
+
+
+let customer =
+customers.find(c=>c.id===id);
+
+
+if(!customer){
+
+alert("Customer not found");
+return;
+
+}
+
+
+let amount =
+Number(document.getElementById("newAmount").value);
+
+
+let items =
+Number(document.getElementById("newItems").value);
+
+
+let date =
+document.getElementById("newDate").value;
+
+
+
+if(!amount || !date){
+
+alert("Fill purchase details");
+
+return;
+
+}
+
+
+
+// keep old history
+
+customer.previousPurchases =
+customer.previousPurchases || [];
+
+
+
+customer.previousPurchases.push({
+
+amount:customer.totalAmount,
+date:customer.date,
+items:customer.totalItems
+
+});
+
+
+
+// new purchase
+
+customer.totalAmount = amount;
+
+customer.totalItems = items;
+
+customer.date = date;
+
+customer.advance = 0;
+
+customer.installments=[];
+
+customer.remaining = amount;
+
+
+
+localStorage.setItem(
+"customers",
+JSON.stringify(customers)
+);
+
+
+
+addHistory(
+"New Purchase Added",
+customer.id
+);
+
+
+
+alert(
+"Customer account reopened with same ID"
+);
+
+
+loadClearedCustomers();
+
+}
+
+function printHistory(id){
+
+
+let customer =
+customers.find(c=>c.id===id);
+
+
+let text = 
+`
+Customer Name:
+${customer.name}
+
+
+Customer ID:
+${customer.id}
+
+
+Payment History:
+
+`;
+
+
+customer.installments.forEach(i=>{
+
+text +=
+`
+${i.date}  Rs ${i.amount}
+`;
+
+});
+
+
+let win =
+window.open("");
+
+win.document.write(
+`
+<pre>${text}</pre>
+`
+);
+win.document.close();
+win.focus();
+win.print();
+}
+function downloadPDF(id){
+alert(
+"PDF generation can be connected using jsPDF library"
+);
+
+}

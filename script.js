@@ -1,12 +1,13 @@
+// ================= LOGOUT =================
+
 function logout(){
 
-localStorage.removeItem("login");
-localStorage.removeItem("role");
-localStorage.removeItem("currentUser");
-window.location.href="login.html";
+    // remove login information
+    localStorage.removeItem("login");
+    localStorage.removeItem("role");
+    localStorage.removeItem("currentUser");
 
-}
-
-if(localStorage.getItem("login") !== "true"){
+    // go to login page
     window.location.href="login.html";
+
 }

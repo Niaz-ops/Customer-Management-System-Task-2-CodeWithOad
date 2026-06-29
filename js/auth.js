@@ -1,33 +1,75 @@
-let role = localStorage.getItem("role");
+// ================= LOGIN CHECK =================
+
+
+let currentPage =
+window.location.pathname;
+
+
+
+if(
+localStorage.getItem("login") !== "true"
+&&
+!currentPage.includes("login.html")
+){
+
+window.location.href="login.html";
+
+}
+
+
+
+// ================= ROLE PERMISSION =================
+
+
+let role =
+localStorage.getItem("role");
+
+
+
 function checkPermission(permission){
 
+
 let permissions = {
+
+
 "Super Admin":[
+
 "add",
 "edit",
 "delete",
 "installment",
 "reports",
-"print"
+"print",
+"branch",
+"backup"
+
 ],
 
+
+
 "Branch Manager":[
+
 "add",
 "edit",
 "installment",
 "reports",
 "print"
+
 ]
 
 };
 
-if(
-!permissions[role] ||
-!permissions[role].includes(permission)
-){
+
+
+if(!permissions[role]){
+
 return false;
+
 }
 
-return true;
+
+
+return permissions[role].includes(permission);
+
 
 }

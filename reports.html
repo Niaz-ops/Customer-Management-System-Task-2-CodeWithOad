@@ -1,118 +1,324 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Reports - CMS</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/reports.css">
-    
-</head>
-<body>
-<button class="hamburger" onclick="toggleSidebar()">☰</button>
-    <div class="layout">
-<aside class="sidebar" id="sidebar">
-   
-    <div class="logo">
-        <div class="logo-icon">I</div>
-        <button class="close-btn" onclick="closeSidebar()">✕</button>
-        <div>
-        <h3>Installment Pro</h3>
-        <p>Central Management</p>
-        </div>
-    </div>
-    <div class="profile">
-        <h4 id="userRole">Super Admin</h4>
-        <p> Administrator</p>
-        <span class="connected">● Connected</span>
-    </div>
-    <nav>
 
-        <a href="dashboard.html">▦ Dashboard</a>
-        <a href="customers.html">♙ Customer Profiles</a>
-        <a href="installments.html">💳 Installments</a>
-        <a href="major-sheet.html"> ▣ Major Ledger</a>
-        <a class="active" href="reports.html">📊 Reports</a>
-        <a href="branches.html"> ⚯ Branch Control</a>
-        <a href="cleared.html">✓ Cleared Accounts</a>
-        <a href="history.html">◉ Security & Audits</a>
-        <a href="backup.html"> 💾 Backup</a>
-        <a href="customer-portal.html">👤 Customer Portal</a>
-    </nav>
-    <button class="signout-btn" onclick="logout()">↪ Sign Out</button>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Reports - CMS</title>
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/reports.css">
+
+</head>
+
+
+<body>
+
+
+<button class="hamburger" onclick="toggleSidebar()">☰</button>
+
+
+<div class="layout">
+
+
+<aside class="sidebar" id="sidebar">
+
+
+<div class="logo">
+
+<div class="logo-icon">I</div>
+
+<button class="close-btn" onclick="closeSidebar()">✕</button>
+
+<div>
+
+<h3>Installment Pro</h3>
+
+<p>Central Management</p>
+
+</div>
+
+</div>
+
+
+
+<div class="profile">
+
+<h4 id="userRole">Super Admin</h4>
+
+<p>Administrator</p>
+
+<span class="connected">
+● Connected
+</span>
+
+</div>
+
+
+
+
+<nav>
+
+<a href="dashboard.html">
+▦ Dashboard
+</a>
+
+<a href="customers.html">
+♙ Customer Profiles
+</a>
+
+
+<a href="installments.html">
+💳 Installments
+</a>
+
+
+<a href="major-sheet.html">
+▣ Major Ledger
+</a>
+
+
+<a class="active" href="reports.html">
+📊 Reports
+</a>
+
+
+<a href="branches.html">
+⚯ Branch Control
+</a>
+
+
+<a href="cleared.html">
+✓ Cleared Accounts
+</a>
+
+
+<a href="history.html">
+◉ Security & Audits
+</a>
+
+
+<a href="backup.html">
+💾 Backup
+</a>
+
+
+<a href="customer-portal.html">
+👤 Customer Portal
+</a>
+
+
+</nav>
+
+
+<button class="signout-btn" onclick="logout()">
+
+↪ Sign Out
+
+</button>
+
+
 </aside>
 
+
+
+
+
 <div class="main">
-    
-<h2>Reports & Analytics</h2>
+
+
+
+<h2 id="reportTitle">
+All Customers Report
+</h2>
+
+
+
+
 <div class="summary">
+
+
 <div class="card">
 <h3>Total Customers</h3>
 <p id="customersCount">0</p>
 </div>
+
+
 
 <div class="card">
 <h3>Total Items Sold</h3>
 <p id="itemsSold">0</p>
 </div>
 
+
+
 <div class="card">
 <h3>Advance Received</h3>
 <p id="advanceTotal">0</p>
 </div>
 
+
+
+
 <div class="card">
-<h3>Installments Collected</h3>
+<h3>Installments</h3>
 <p id="installmentTotal">0</p>
 </div>
 
+
+
+
 <div class="card">
-<h3>Outstanding Balance</h3>
+<h3>Remaining</h3>
 <p id="remainingTotal">0</p>
 </div>
 
-<div class="card">
-<h3>Total Branches</h3>
-<p id="branchCount">0</p>
-</div>
+
+
 
 <div class="card">
 <h3>Total Collection</h3>
 <p id="collectionTotal">0</p>
 </div>
-</div>
-<div class="report-filter">
-<button id="dailyBtn" onclick="filterReport('daily')">Daily</button>
-<button id="tenDaysBtn" onclick="filterReport('10days')">Last 10 Days</button>
-<button id="monthlyBtn" onclick="filterReport('monthly')">Monthly</button>
-<button id="allBtn" onclick="filterReport('all')">All Records</button>
-<button onclick="printReport()">Print Report</button>
-</div>
-<h2>Customer Report</h2>
 
-<table border="1" width="100%">
+
+</div>
+
+
+
+
+
+<div class="filters">
+
+
+<button onclick="filterReport('daily')">
+Daily
+</button>
+
+
+<button onclick="filterReport('10days')">
+Last 10 Days
+</button>
+
+
+
+<button onclick="filterReport('monthly')">
+Monthly
+</button>
+
+
+
+<button onclick="filterReport('all')">
+All
+</button>
+
+
+
+<select id="branchFilter"
+onchange="filterBranchReport()">
+
+
+<option value="all">
+All Branches
+</option>
+
+
+</select>
+
+
+
+
+<input 
+type="text"
+id="searchReport"
+placeholder="Search Customer"
+onkeyup="searchReport()"
+>
+
+
+
+<button onclick="printReport()">
+
+Print
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+<table>
+
+
 <thead>
+
+
 <tr>
+
 <th>Date</th>
-<th>Customer</th>
+
+<th>ID</th>
+
+<th>Name</th>
+
+<th>Branch</th>
+
 <th>Items</th>
-<th>Total Amount</th>
+
+<th>Total</th>
+
 <th>Advance</th>
+
 <th>Installments</th>
+
 <th>Remaining</th>
+
+
 </tr>
+
 
 </thead>
 
 
+
+
 <tbody id="reportTable">
 
+
 </tbody>
+
+
 </table>
+
+
+
+
 </div>
+
+
 </div>
+
+
+
+
 <script src="js/sidebar.js"></script>
+
 <script src="script.js"></script>
+
+<script src="js/setup.js"></script>
+
 <script src="js/auth.js"></script>
+
 <script src="js/reports.js"></script>
+
+
+
 </body>
+
 </html>

@@ -1,29 +1,57 @@
 function addHistory(action, details){
 
+
 let history =
-JSON.parse(localStorage.getItem("history")) || [];
+JSON.parse(localStorage.getItem("history"))
+|| [];
 
 
-history.push({
+
+let record = {
+
 
 id: Date.now(),
 
-user: localStorage.getItem("currentUser") || "Unknown",
-
-role: localStorage.getItem("role") || "-",
 
 action: action,
 
+
 details: details,
 
-date: new Date().toLocaleString()
 
-});
+
+user:
+localStorage.getItem("currentUser")
+||
+"Unknown",
+
+
+
+role:
+localStorage.getItem("role")
+||
+"Guest",
+
+
+
+date:
+new Date().toLocaleString()
+
+
+
+};
+
+
+
+history.push(record);
+
 
 
 localStorage.setItem(
 "history",
 JSON.stringify(history)
 );
+
+
 
 }

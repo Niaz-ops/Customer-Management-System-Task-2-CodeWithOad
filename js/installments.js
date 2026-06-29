@@ -16,7 +16,10 @@ alert("Customer not found");
 return;
 }
 customer.installments = customer.installments || [];
-customer.installments.push({ amount, date });
+let paymentTime = new Date().toLocaleString();
+customer.installments.push({amount: amount,date: date,time: paymentTime
+});
+
 let totalPaid = (customer.advance || 0) +
 customer.installments.reduce((sum, i) => sum + i.amount, 0);
 customer.remaining = customer.totalAmount - totalPaid;
@@ -24,6 +27,11 @@ localStorage.setItem("customers", JSON.stringify(customers));
 
 addHistory("Installment Received",id + " Rs " + amount);
 generateReceipt(customer, amount, date);
+generatePDF(
+customer,
+amount,
+date
+);
 
 alert("Payment added successfully");
 showHistory(customer);
@@ -33,7 +41,7 @@ let box = document.getElementById("history");
 box.innerHTML = "<h4>Customer: " + customer.name + "</h4>";
 customer.installments.forEach((p, index) => {
 box.innerHTML += `
-<p>${index + 1}. ${p.date} - Rs ${p.amount}</p>
+<p>${index + 1}.${p.date}${p.time}-Rs ${p.amount}</p>
 `;
 });
 }
@@ -163,5 +171,68 @@ if(sendWhatsApp){
     );
 
 }
+
+}
+function generatePDF(customer,amount,date){
+
+
+const {jsPDF}=window.jspdf;
+
+
+let doc=new jsPDF();
+
+
+doc.setFontSize(18);
+
+doc.text(
+"Installment Receipt",
+20,
+20
+);
+
+
+
+doc.setFontSize(12);
+
+
+doc.text(
+"Customer Name: "+customer.name,
+20,
+40
+);
+
+
+doc.text(
+"Customer ID: "+customer.id,
+20,
+50
+);
+
+
+
+doc.text(
+"Payment Date: "+date,
+20,
+60
+);
+
+
+
+doc.text(
+"Amount Received: Rs "+amount,
+20,
+70
+);
+
+
+
+doc.text(
+"Remaining Balance: Rs "+customer.remaining,
+20,80
+);
+doc.save(
+"Receipt-"+customer.id+".pdf"
+);
+
 
 }

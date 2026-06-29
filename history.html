@@ -4,83 +4,314 @@
 <head>
 
 <meta charset="UTF-8">
-<title>Transaction History - CMS</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Security & Audit - CMS</title>
+
 
 <link rel="stylesheet" href="css/style.css">
+
 <link rel="stylesheet" href="css/history.css">
 
-</head>
-<body>
-<button class="hamburger" onclick="toggleSidebar()">☰</button>
-    <div class="layout">
-<aside class="sidebar" id="sidebar">
-   
-    <div class="logo">
-        <div class="logo-icon">I</div>
-        <button class="close-btn" onclick="closeSidebar()">✕</button>
-        <div>
-        <h3>Installment Pro</h3>
-        <p>Central Management</p>
-        </div>
-    </div>
-    <div class="profile">
-        <h4 id="userRole">Super Admin</h4>
-        <p> Administrator</p>
-        <span class="connected">● Connected</span>
-    </div>
-    <nav>
 
-        <a href="dashboard.html">▦ Dashboard</a>
-        <a href="customers.html">♙ Customer Profiles</a>
-        <a href="installments.html">💳 Installments</a>
-        <a href="major-sheet.html"> ▣ Major Ledger</a>
-        <a href="reports.html">📊 Reports</a>
-        <a href="branches.html"> ⚯ Branch Control</a>
-        <a href="cleared.html">✓ Cleared Accounts</a>
-        <a class="active" href="history.html">◉ Security & Audits</a>
-        <a href="backup.html"> 💾 Backup</a>
-        <a href="customer-portal.html">👤 Customer Portal</a>
-    </nav>
-    <button class="signout-btn" onclick="logout()">↪ Sign Out</button>
+</head>
+
+
+<body>
+
+
+<button class="hamburger" onclick="toggleSidebar()">
+☰
+</button>
+
+
+
+<div class="layout">
+
+
+<aside class="sidebar" id="sidebar">
+
+
+<div class="logo">
+
+<div class="logo-icon">
+I
+</div>
+
+
+<button class="close-btn" onclick="closeSidebar()">
+✕
+</button>
+
+
+<div>
+
+<h3>
+Installment Pro
+</h3>
+
+
+<p>
+Central Management
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="profile">
+
+<h4 id="userRole">
+Super Admin
+</h4>
+
+
+<p>
+Administrator
+</p>
+
+
+<span class="connected">
+● Connected
+</span>
+
+
+</div>
+
+
+
+
+
+<nav>
+
+
+<a href="dashboard.html">
+▦ Dashboard
+</a>
+
+
+<a href="customers.html">
+♙ Customer Profiles
+</a>
+
+
+<a href="installments.html">
+💳 Installments
+</a>
+
+
+<a href="major-sheet.html">
+▣ Major Ledger
+</a>
+
+
+<a href="reports.html">
+📊 Reports
+</a>
+
+
+<a href="branches.html">
+⚯ Branch Control
+</a>
+
+
+<a href="cleared.html">
+✓ Cleared Accounts
+</a>
+
+
+<a class="active" href="history.html">
+◉ Security & Audits
+</a>
+
+
+<a href="backup.html">
+💾 Backup
+</a>
+
+
+<a href="customer-portal.html">
+👤 Customer Portal
+</a>
+
+
+
+</nav>
+
+
+
+
+<button class="signout-btn" onclick="logout()">
+
+↪ Sign Out
+
+</button>
+
+
 </aside>
+
+
+
+
+
 
 <div class="main">
 
 
+<h2>
+Security & Audit Trail
+</h2>
 
-<h2>Audit Trail</h2>
-<p>Unalterable personnel ledger logs, operational tracking, and system disaster recovery backups</p>
+
+<p class="description">
+
+System activity monitoring and operational tracking
+
+</p>
+
+
+
+
+
+<div class="audit-summary">
+
+
+<div>
+
+<h3>
+Total Activities
+</h3>
+
+
+<p id="historyCount">
+0
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+<div class="controls">
+
 
 <input 
 type="text"
 id="searchHistory"
-placeholder="Search action, user, details..."
+placeholder="Search activity..."
 onkeyup="searchHistory()"
 >
-<button onclick="clearAllHistory()">
-Clear All History
-</button>
-<table border="1" width="100%">
 
+
+
+<select id="actionFilter"
+onchange="filterAction()">
+
+
+
+<option value="all">
+All Actions
+</option>
+
+
+<option>
+Login
+</option>
+
+
+<option>
+Logout
+</option>
+
+
+<option>
+Customer Added
+</option>
+
+
+<option>
+Customer Updated
+</option>
+
+
+<option>
+Customer Deleted
+</option>
+
+
+<option>
+Installment Received
+</option>
+
+
+<option>
+Branch Created
+</option>
+
+
+
+</select>
+
+
+
+
+<button onclick="printHistory()">
+Print
+</button>
+
+
+
+<button onclick="exportHistory()">
+Export
+</button>
+
+
+
+
+<button class="danger"
+onclick="clearAllHistory()">
+
+Clear All
+
+</button>
+
+
+
+</div>
+<table>
 <thead>
+
 <tr>
-<th>ID</th>
+<th>#</th>
 <th>Action</th>
-<th>User</th>
-<th>Role</th>
-<th>Details</th>
-<th>Date & Time</th>
-<th>Delete</th>
+<th>User</th><th>Role</th><th>Details</th><th>Date & Time</th><th>Action</th>
 </tr>
 </thead>
 <tbody id="historyTable">
+
 </tbody>
+
 </table>
 </div>
 </div>
 <script src="js/sidebar.js"></script>
 <script src="script.js"></script>
+<script src="js/setup.js"></script>
 <script src="js/auth.js"></script>
+<script src="js/history.js"></script>
 <script src="js/history-view.js"></script>
 </body>
 

@@ -1,61 +1,245 @@
-/* Backup Page */
+/* ================= BACKUP PAGE ================= */
 
-.main h2{
-
-font-size:24px;
-margin-bottom:20px;
-color:#111;
-
-}
 
 .main{
+
 background:#f5f8fc;
 
 }
-.backup-card{
+
+
+
+.backup-container{
+
+max-width:1000px;
+
+}
+
+
+
+.backup-container h2{
+
+font-size:28px;
+
+color:#1f2937;
+
+margin-bottom:10px;
+
+}
+
+
+
+.description{
+
+color:#666;
+
+margin-bottom:25px;
+
+}
+
+
+
+
+
+.backup-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(300px,1fr));
+
+gap:25px;
+
+}
+
+
+
+
+
+.backup-box{
+
 background:white;
+
 padding:30px;
+
 border-radius:15px;
-border:1px solid #ddd;
-max-width:600px;
-box-shadow:0 2px 8px rgba(0,0,0,0.08);
+
+box-shadow:
+0 4px 12px rgba(0,0,0,0.08);
+
+border:1px solid #e5e7eb;
+
 }
-.main button{
-padding:12px 25px;
-background:#0866ff;
+
+
+
+
+
+.icon{
+
+font-size:40px;
+
+margin-bottom:15px;
+
+}
+
+
+
+
+
+.backup-box h3{
+
+font-size:20px;
+
+margin-bottom:10px;
+
+color:#111827;
+
+}
+
+
+
+
+
+.backup-box p{
+
+color:#666;
+
+line-height:1.5;
+
+}
+
+
+
+
+
+.backup-box ul{
+
+margin:15px 0;
+
+padding-left:20px;
+
+color:#555;
+
+}
+
+
+
+
+
+.backup-box li{
+
+margin:8px 0;
+
+}
+
+
+
+
+
+.backup-box button{
+
+background:#3d40ce;
+
 color:white;
+
 border:none;
+
+padding:12px 22px;
+
 border-radius:8px;
+
 cursor:pointer;
+
 font-size:15px;
-margin:10px 0;
+
+margin-top:15px;
 
 }
 
 
-.main button:hover{
 
-background:#0052cc;
+
+
+.backup-box button:hover{
+
+background:#292bb0;
 
 }
+
+
 
 
 
 #restoreFile{
 
+width:100%;
+
 padding:10px;
-background:white;
-border:1px solid #ddd;
+
+border:1px solid #ccc;
+
 border-radius:8px;
+
+margin-top:15px;
 
 }
 
 
 
+
+
 #message{
 
-margin-top:15px;
+margin-top:25px;
+
+padding:12px;
+
 color:green;
+
 font-weight:bold;
+
+}
+
+
+
+
+
+.warning{
+
+margin-top:30px;
+
+background:#fff3cd;
+
+border-left:5px solid orange;
+
+padding:15px;
+
+border-radius:8px;
+
+color:#664d03;
+
+}
+
+
+
+
+
+@media(max-width:700px){
+
+
+.backup-container{
+
+padding:10px;
+
+}
+
+
+.backup-grid{
+
+grid-template-columns:1fr;
+
+}
+
 
 }

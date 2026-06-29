@@ -12,37 +12,39 @@
 </head>
 
 <body>
-<div class="layout">
-<aside class="sidebar">
-<div class="logo">
-<div class="logo-icon">
-</div>
+<button class="hamburger" onclick="toggleSidebar()">☰</button>
+    <div class="layout">
+<aside class="sidebar" id="sidebar">
+   
+    <div class="logo">
+        <div class="logo-icon">I</div>
+        <button class="close-btn" onclick="closeSidebar()">✕</button>
+        <div>
+        <h3>Installment Pro</h3>
+        <p>Central Management</p>
+        </div>
+    </div>
+    <div class="profile">
+        <h4 id="userRole">Super Admin</h4>
+        <p> Administrator</p>
+        <span class="connected">● Connected</span>
+    </div>
+    <nav>
 
-<div>
-<h3>Installment Pro</h3>
-<p>Central Management</p>
-</div>
-
-</div>
-
-<div class="profile">
-<h4 id="userRole">Super Admin</h4>
-<p>Administrator</p>
-<span>● Connected</span>
-</div>
-
-<nav>
-<a class="active" href="dashboard.html">▦ Dashboard</a>
-<a href="customers.html">♙ Customer Profiles</a>
-<a href="major-ledger.html">▣ Major Ledger</a>
-<a href="cleared.html">✓ Cleared Accounts</a>
-<a href="staff.html">♙ Staff Directory</a>
-<a href="branches.html">⚯ Branch Control</a>
-<a href="security-audits.html">◉ Security & Audits</a>
-</nav>
-
-<button class="logout" onclick="logout()">↪ Sign Out</button>
+        <a class="active" href="dashboard.html">▦ Dashboard</a>
+        <a href="customers.html">♙ Customer Profiles</a>
+        <a href="installments.html">💳 Installments</a>
+        <a href="major-sheet.html"> ▣ Major Ledger</a>
+        <a href="reports.html">📊 Reports</a>
+        <a href="branches.html"> ⚯ Branch Control</a>
+        <a href="cleared.html">✓ Cleared Accounts</a>
+        <a href="history.html">◉ Security & Audits</a>
+        <a href="backup.html"> 💾 Backup</a>
+        <a href="customer-portal.html">👤 Customer Portal</a>
+    </nav>
+    <button class="signout-btn" onclick="logout()">↪ Sign Out</button>
 </aside>
+
 
 <main class="main">
 <section class="header">
@@ -106,6 +108,9 @@
 
 </div>
 
+<script src="js/sidebar.js"></script>
+<script src="script.js"></script>
+<script src="js/setup.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/dashboard.js"></script>
 
